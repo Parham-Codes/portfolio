@@ -4,7 +4,7 @@ import {
   Rocket,
   FileText,
   Github,
-  Linkedin,
+  Send,
   Code2,
   Globe,
   Database,
@@ -109,13 +109,13 @@ export const Hero: React.FC = () => {
             <span>GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/parhamtaghikhani"
+            href="https://t.me/ParhamTGK"
             target="_blank"
             rel="noreferrer"
             className="flex-1 sm:flex-initial min-h-[44px] justify-center px-3.5 py-2 rounded-xl bg-[#181c24] border border-white/[0.06] text-[#bdc8d1] hover:text-[#38bdf8] transition-colors flex items-center gap-2 font-mono text-xs"
           >
-            <Linkedin className="w-4 h-4" />
-            <span>LinkedIn</span>
+            <Send className="w-4 h-4" />
+            <span>Telegram</span>
           </a>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Terminal, Github, Linkedin, User, Menu, X, ArrowUpRight, Layers } from 'lucide-react';
+import { Terminal, Github, Menu, X, ArrowUpRight, Layers } from 'lucide-react';
 import { useActiveSection } from '../../hooks/useActiveSection.ts';
 import { cn } from '../../utils/cn.ts';
 
@@ -140,15 +140,6 @@ export const Navbar: React.FC = () => {
             >
               <Github className="w-4 h-4" />
             </a>
-            <a
-              href="https://linkedin.com/in/parhamtaghikhani"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn Profile"
-              className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center bg-[#262a33]/60 text-[#bdc8d1] hover:bg-[#31353e] hover:text-white transition-colors border border-white/[0.06]"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
 
             <button
               onClick={handleContactClick}
@@ -156,13 +147,6 @@ export const Navbar: React.FC = () => {
             >
               Get in Touch
             </button>
-
-            <div
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#38bdf8] to-[#56e5a9] flex items-center justify-center shrink-0 text-[#00354a]"
-              title="Parham Taghikhani - Front-End Engineer"
-            >
-              <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-            </div>
 
             {/* Mobile menu toggle */}
             <button
@@ -254,16 +238,7 @@ export const Navbar: React.FC = () => {
               className="flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-[#262a33] text-[#dfe2ee] font-sans text-xs font-semibold flex items-center justify-center gap-2 hover:bg-[#31353e] transition-colors border border-white/10"
             >
               <Github className="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/parhamtaghikhani"
-              target="_blank"
-              rel="noreferrer"
-              className="flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-[#262a33] text-[#dfe2ee] font-sans text-xs font-semibold flex items-center justify-center gap-2 hover:bg-[#31353e] transition-colors border border-white/10"
-            >
-              <Linkedin className="w-4 h-4" />
-              <span>LinkedIn</span>
+              <span>GitHub Profile</span>
             </a>
           </div>
 

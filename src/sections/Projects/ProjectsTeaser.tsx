@@ -16,8 +16,8 @@ import { SectionTitle } from '../../components/SectionTitle/SectionTitle.tsx';
 import { projects } from '../../data/projects.js';
 
 export const ProjectsTeaser: React.FC = () => {
-  // Show featured projects in priority order: 1. ForTech, 2. ArticleHub, 3. DoreBazar
-  const featured = projects.filter((p) => p.featured);
+  // Show the top 2 flagship featured projects: 1. ForTech (Full E-Commerce), 2. ArticleHub (React CRUD)
+  const featured = projects.filter((p) => p.featured).slice(0, 2);
 
   return (
     <section id="featured-projects" className="py-16 md:py-24 flex flex-col gap-10">
@@ -25,7 +25,7 @@ export const ProjectsTeaser: React.FC = () => {
         <SectionTitle
           eyebrow="Featured Projects"
           title="Featured Work &amp; Real Applications"
-          description="A progressive showcase ranging from a full-featured React e-commerce application, to REST API CRUD workflows, to responsive RTL/Persian interface engineering."
+          description="A showcase of flagship React projects featuring full-scale authentication, role-based workflows, REST API integrations, and robust application architecture."
         />
 
         {/* Quick Link to Projects Page */}
@@ -40,8 +40,8 @@ export const ProjectsTeaser: React.FC = () => {
         </div>
       </div>
 
-      {/* 3 Curated Featured Cards in Strict Priority Order */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+      {/* 2 Curated Featured Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
         {featured.map((project) => {
           const liveUrl = (project as any).liveUrl;
           const hasRealLiveUrl = Boolean(

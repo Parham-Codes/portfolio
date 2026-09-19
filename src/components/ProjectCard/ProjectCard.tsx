@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   ExternalLink,
   Github,
@@ -14,6 +15,7 @@ import {
   ArrowRight,
   Code2,
   Cpu,
+  X,
 } from 'lucide-react';
 import { Button } from '../Button/Button.tsx';
 import { cn } from '../../utils/cn.ts';
@@ -72,6 +74,36 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
       project.liveUrl !== '#' &&
       project.liveUrl.startsWith('http')
   );
+
+  // Prevent background scrolling when modal is active and allow ESC to close
+  useEffect(() => {
+    if (!activeModal) return;
+
+    // Lock body scroll
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    
+    // Prevent layout shift from scrollbar disappearing
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    document.body.style.overflow = 'hidden';
+
+    // Handle ESC key
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeModal]);
 
   return (
     <>
@@ -300,41 +332,54 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
         </div>
       </div>
 
-      {/* Modal Preview — Comprehensive Technical Details */}
-      {activeModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md"
-          onClick={() => setActiveModal(false)}
-        >
+      {/* Modal Preview — Rendered directly at document.body via Portal to guarantee it sits above header */}
+      {activeModal &&
+        typeof document !== 'undefined' &&
+        createPortal(
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#181c24] border border-white/20 p-5 sm:p-6 md:p-8 shadow-2xl flex flex-col gap-4 sm:gap-5 text-left"
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`modal-title-${project.id}`}
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md overflow-y-auto"
+            onClick={() => setActiveModal(false)}
           >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#38bdf8] animate-pulse shrink-0" />
-                <h4 className="font-display text-lg sm:text-xl font-bold text-white truncate">
-                  {project.name || project.title}
-                </h4>
-                {(project.shortLabel || project.shortTitle) && (
-                  <span className="font-mono text-xs text-[#87929a] hidden sm:inline">
-                    ({project.shortLabel || project.shortTitle})
-                  </span>
-                )}
-              </div>
-              <button
-                onClick={() => setActiveModal(false)}
-                className="text-gray-400 hover:text-white text-xs sm:text-sm font-mono px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 shrink-0 transition-colors"
-              >
-                ESC [×]
-              </button>
-            </div>
+            {/* Modal Dialog Card */}
+            <div
+              className="relative w-full max-w-2xl max-h-[90vh] my-auto overflow-y-auto rounded-2xl bg-[#181c24] border border-white/20 p-5 sm:p-6 md:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] flex flex-col gap-4 sm:gap-5 text-left animate-in fade-in zoom-in-95 duration-150"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header with explicit top-right Close (×) button */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#38bdf8] animate-pulse shrink-0" />
+                  <h4
+                    id={`modal-title-${project.id}`}
+                    className="font-display text-lg sm:text-xl font-bold text-white truncate"
+                  >
+                    {project.name || project.title}
+                  </h4>
+                  {(project.shortLabel || project.shortTitle) && (
+                    <span className="font-mono text-xs text-[#87929a] hidden sm:inline truncate">
+                      ({project.shortLabel || project.shortTitle})
+                    </span>
+                  )}
+                </div>
 
-            {/* Image Preview */}
-            <div className="rounded-xl overflow-hidden border border-white/10 max-h-52 sm:max-h-64">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveModal(false)}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/10 hover:bg-rose-500/20 text-gray-300 hover:text-rose-300 border border-white/15 hover:border-rose-500/40 flex items-center justify-center shrink-0 transition-all cursor-pointer shadow-sm group"
+                  aria-label="Close modal"
+                  title="Close (ESC)"
+                >
+                  <X className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </button>
+              </div>
+
+              {/* Image Preview */}
+              <div className="rounded-xl overflow-hidden border border-white/10 max-h-52 sm:max-h-64">
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              </div>
 
             {/* Accuracy Note Banner */}
             {project.accuracyNote && (
@@ -523,7 +568,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

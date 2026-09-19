@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Github, Linkedin, ArrowUp } from 'lucide-react';
+import { Terminal, Github, Send, ArrowUp } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
           </span>
         </div>
 
-        {/* Links: GitHub & LinkedIn */}
+        {/* Links: GitHub & Telegram */}
         <div className="flex items-center gap-4 font-mono text-xs text-[#bdc8d1]">
           <a
             href="https://github.com/Parham-Codes"
@@ -39,14 +39,14 @@ export const Footer: React.FC = () => {
           </a>
           <span className="text-[#3e484f]">•</span>
           <a
-            href="https://linkedin.com/in/parhamtaghikhani"
+            href="https://t.me/ParhamTGK"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1.5 hover:text-[#38bdf8] transition-colors"
-            aria-label="LinkedIn Profile"
+            aria-label="Telegram Profile"
           >
-            <Linkedin className="w-4 h-4 text-[#87929a]" />
-            <span>LinkedIn</span>
+            <Send className="w-4 h-4 text-[#87929a]" />
+            <span>Telegram</span>
           </a>
           <span className="text-[#3e484f]">•</span>
           <button
