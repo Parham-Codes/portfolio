@@ -1,0 +1,280 @@
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Terminal, Github, Linkedin, User, Menu, X, ArrowUpRight, Layers } from 'lucide-react';
+import { useActiveSection } from '../../hooks/useActiveSection.ts';
+import { cn } from '../../utils/cn.ts';
+
+interface NavItem {
+  id: string;
+  label: string;
+  path: string;
+  isRoute?: boolean;
+}
+
+const navItems: NavItem[] = [
+  { id: 'hero', label: 'Overview', path: '/#hero' },
+  { id: 'about', label: 'About', path: '/#about' },
+  { id: 'projects', label: 'Projects', path: '/projects', isRoute: true },
+  { id: 'skills', label: 'Stack', path: '/#skills' },
+  { id: 'experience', label: 'Experience', path: '/#experience' },
+  { id: 'contact', label: 'Contact', path: '/#contact' },
+];
+
+export const Navbar: React.FC = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activeSection = useActiveSection(['hero', 'about', 'featured-projects', 'skills', 'experience', 'contact'], 'hero');
+
+  const isProjectsPage = location.pathname === '/projects';
+
+  const handleNavClick = (e: React.MouseEvent, item: NavItem) => {
+    setMobileMenuOpen(false);
+
+    if (item.isRoute) {
+      // Let standard Link or navigate to /projects handle it
+      return;
+    }
+
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate(item.path);
+    } else {
+      const hash = item.path.split('#')[1];
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    setMobileMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/#contact');
+    } else {
+      e.preventDefault();
+      const target = document.getElementById('contact');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <>
+      <header className="fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-2 sm:pt-3 px-2 sm:px-6">
+        <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
+          {/* Logo */}
+          <Link
+            to="/"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center gap-2 sm:gap-2.5 shrink-0 group focus:outline-none"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#6366f1] flex items-center justify-center text-[#0a0e16] shadow-md shadow-[#38bdf8]/20 group-hover:scale-105 transition-transform">
+              <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+            </div>
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              <span className="font-display text-sm sm:text-lg font-bold text-[#dfe2ee] tracking-tight">
+                Parham<span className="text-[#38bdf8]">.dev</span>
+              </span>
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#56e5a9] animate-pulse" />
+            </div>
+          </Link>
+
+          {/* Desktop Nav Items */}
+          <nav className="hidden lg:flex items-center gap-1 bg-[#121620]/60 p-1 rounded-full border border-white/[0.05]">
+            {navItems.map((item) => {
+              const isActive = item.isRoute
+                ? isProjectsPage
+                : !isProjectsPage && activeSection === item.id;
+
+              if (item.isRoute) {
+                return (
+                  <Link
+                    key={item.id}
+                    to="/projects"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      'font-sans text-xs sm:text-sm font-semibold rounded-full px-3.5 py-1.5 transition-all duration-200 flex items-center gap-1.5',
+                      isActive
+                        ? 'bg-[#38bdf8] text-[#00354a] shadow-md shadow-[#38bdf8]/25'
+                        : 'text-[#bdc8d1] hover:text-[#dfe2ee] hover:bg-white/[0.06]'
+                    )}
+                  >
+                    <span>{item.label}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] hidden group-hover:inline-block" />
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={item.id}
+                  href={item.path}
+                  onClick={(e) => handleNavClick(e, item)}
+                  className={cn(
+                    'font-sans text-xs sm:text-sm font-semibold rounded-full px-3.5 py-1.5 transition-all duration-200',
+                    isActive
+                      ? 'bg-[#38bdf8] text-[#00354a] shadow-md shadow-[#38bdf8]/25'
+                      : 'text-[#bdc8d1] hover:text-[#dfe2ee] hover:bg-white/[0.06]'
+                  )}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a
+              href="https://github.com/Parham-Codes"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub Profile"
+              className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center bg-[#262a33]/60 text-[#bdc8d1] hover:bg-[#31353e] hover:text-white transition-colors border border-white/[0.06]"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/parhamtaghikhani"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn Profile"
+              className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center bg-[#262a33]/60 text-[#bdc8d1] hover:bg-[#31353e] hover:text-white transition-colors border border-white/[0.06]"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+
+            <button
+              onClick={handleContactClick}
+              className="hidden md:inline-flex items-center justify-center px-4 py-2 rounded-full bg-[#38bdf8] text-[#00354a] font-sans text-xs sm:text-sm font-bold hover:bg-[#7bd0ff] transition-all shadow-[0_4px_20px_rgba(56,189,248,0.25)] hover:shadow-[0_4px_25px_rgba(56,189,248,0.4)] cursor-pointer"
+            >
+              Get in Touch
+            </button>
+
+            <div
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#38bdf8] to-[#56e5a9] flex items-center justify-center shrink-0 text-[#00354a]"
+              title="Parham Taghikhani - Front-End Engineer"
+            >
+              <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+            </div>
+
+            {/* Mobile menu toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-[#262a33]/80 text-[#bdc8d1] hover:text-white border border-white/10"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Backdrop for Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed top-18 sm:top-20 inset-x-3 sm:inset-x-4 max-w-md mx-auto z-50 rounded-2xl bg-[#181c24]/98 border border-white/15 backdrop-blur-2xl p-4 sm:p-5 shadow-2xl flex flex-col gap-3 animate-fade-in">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <span className="font-mono text-xs text-[#38bdf8] uppercase tracking-wider font-semibold">
+              Navigation Menu
+            </span>
+            <span className="font-mono text-xs text-[#56e5a9] flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#56e5a9] animate-pulse" />
+              Available for hire
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            {navItems.map((item) => {
+              const isActive = item.isRoute
+                ? isProjectsPage
+                : !isProjectsPage && activeSection === item.id;
+
+              if (item.isRoute) {
+                return (
+                  <Link
+                    key={item.id}
+                    to="/projects"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      'font-sans text-sm font-semibold rounded-xl px-3.5 py-3 flex items-center justify-between transition-all min-h-[44px]',
+                      isActive
+                        ? 'bg-[#38bdf8] text-[#00354a]'
+                        : 'text-[#bdc8d1] hover:text-white hover:bg-white/5 active:bg-white/10'
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Layers className="w-4 h-4" />
+                      <span>{item.label} (Dedicated Hub)</span>
+                    </div>
+                    <ArrowUpRight className={cn('w-4 h-4', isActive ? 'text-[#00354a]' : 'opacity-70')} />
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={item.id}
+                  href={item.path}
+                  onClick={(e) => handleNavClick(e, item)}
+                  className={cn(
+                    'font-sans text-sm font-semibold rounded-xl px-3.5 py-3 flex items-center justify-between transition-all min-h-[44px]',
+                    isActive
+                      ? 'bg-[#38bdf8] text-[#00354a]'
+                      : 'text-[#bdc8d1] hover:text-white hover:bg-white/5 active:bg-white/10'
+                  )}
+                >
+                  <span>{item.label}</span>
+                  <ArrowUpRight className={cn('w-4 h-4', isActive ? 'text-[#00354a]' : 'opacity-70')} />
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Mobile Drawer Quick Links */}
+          <div className="pt-2 border-t border-white/10 flex items-center gap-2">
+            <a
+              href="https://github.com/Parham-Codes"
+              target="_blank"
+              rel="noreferrer"
+              className="flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-[#262a33] text-[#dfe2ee] font-sans text-xs font-semibold flex items-center justify-center gap-2 hover:bg-[#31353e] transition-colors border border-white/10"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/parhamtaghikhani"
+              target="_blank"
+              rel="noreferrer"
+              className="flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-[#262a33] text-[#dfe2ee] font-sans text-xs font-semibold flex items-center justify-center gap-2 hover:bg-[#31353e] transition-colors border border-white/10"
+            >
+              <Linkedin className="w-4 h-4" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
+
+          <button
+            onClick={handleContactClick}
+            className="w-full min-h-[44px] flex items-center justify-center py-2.5 rounded-xl bg-[#38bdf8] text-[#00354a] font-sans text-sm font-bold shadow-lg hover:bg-[#7bd0ff] transition-all cursor-pointer"
+          >
+            Get in Touch
+          </button>
+        </div>
+      )}
+    </>
+  );
+};
