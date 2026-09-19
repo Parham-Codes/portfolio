@@ -1,11 +1,30 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
+function copy404Plugin() {
   return {
-    plugins: [react(), tailwindcss()],
+    name: 'copy-404',
+    closeBundle() {
+      const dist = path.resolve(__dirname, 'dist');
+      const indexPath = path.join(dist, 'index.html');
+      const notFoundPath = path.join(dist, '404.html');
+      if (fs.existsSync(indexPath)) {
+        fs.copyFileSync(indexPath, notFoundPath);
+      }
+    },
+  };
+}
+
+export default defineConfig(() => {
+  // Support GitHub Pages custom subfolder (e.g. /my-repo/) or root
+  const base = process.env.BASE_PATH || './';
+
+  return {
+    base,
+    plugins: [react(), tailwindcss(), copy404Plugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -13,9 +32,7 @@ export default defineConfig(() => {
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
