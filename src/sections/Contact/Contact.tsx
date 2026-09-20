@@ -5,6 +5,7 @@ import {
   Copy,
   Check,
   Github,
+  Linkedin,
   Send,
   ArrowRight,
   ArrowUpRight,
@@ -211,6 +212,18 @@ export const Contact: React.FC = () => {
       icon: Github,
       iconColor: 'text-[#dfe2ee]',
       badgeBg: 'bg-white/10 border-white/15',
+    },
+    {
+      id: '04',
+      label: 'LinkedIn',
+      value: 'parham-taghikhani',
+      description: 'Connect with me professionally',
+      href: 'https://www.linkedin.com/in/parham-taghikhani',
+      isExternal: true,
+      isEmail: false,
+      icon: Linkedin,
+      iconColor: 'text-[#38bdf8]',
+      badgeBg: 'bg-[#38bdf8]/10 border-[#38bdf8]/20',
     },
   ];
 
@@ -484,7 +497,7 @@ export const Contact: React.FC = () => {
               return (
                 <div
                   key={method.id}
-                  className="relative group rounded-xl bg-[#181c24]/80 hover:bg-[#1c2028] border border-white/[0.06] hover:border-[#38bdf8]/40 transition-all duration-200"
+                  className="relative group rounded-xl bg-[#181c24]/80 hover:bg-[#1c2028] border border-white/[0.06] hover:border-[#38bdf8]/40 transition-all duration-300 card-hover-glow"
                 >
                   <a
                     href={method.href}

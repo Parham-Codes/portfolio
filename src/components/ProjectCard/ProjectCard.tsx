@@ -110,7 +110,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
       <div
         id={project.id}
         className={cn(
-          'group rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl p-4 sm:p-7 md:p-8 lg:p-10 shadow-2xl flex flex-col gap-6 sm:gap-8 items-center transition-all duration-300 hover:border-white/[0.16]',
+          'group rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl p-4 sm:p-7 md:p-8 lg:p-10 shadow-2xl flex flex-col gap-6 sm:gap-8 items-center transition-all duration-300 card-hover-glow',
           reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
         )}
       >

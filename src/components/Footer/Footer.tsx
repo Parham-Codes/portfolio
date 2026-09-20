@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
           <button
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="w-8 h-8 rounded-full bg-[#1c2028] hover:bg-[#262a33] text-[#bdc8d1] hover:text-white flex items-center justify-center transition-colors border border-white/10 cursor-pointer ml-1"
+            className="w-8 h-8 rounded-full bg-[#1c2028] hover:bg-[#38bdf8] text-[#bdc8d1] hover:text-[#00354a] flex items-center justify-center transition-all duration-200 border border-white/10 hover:border-[#38bdf8] hover:scale-110 active:scale-95 cursor-pointer ml-1 shadow-sm"
           >
             <ArrowUp className="w-4 h-4" />
           </button>

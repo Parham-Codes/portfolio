@@ -56,7 +56,7 @@ export const ProjectsTeaser: React.FC = () => {
           return (
             <div
               key={project.id}
-              className="group relative rounded-2xl bg-[#181c24]/90 border border-white/[0.08] hover:border-[#38bdf8]/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl"
+              className="group relative rounded-2xl bg-[#181c24]/90 border border-white/[0.08] card-hover-glow transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl"
             >
               {/* Window Header */}
               <div className="px-4 py-2.5 bg-[#121620] border-b border-white/[0.06] flex items-center justify-between">

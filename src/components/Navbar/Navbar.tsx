@@ -13,9 +13,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Overview', path: '/#hero' },
-  { id: 'about', label: 'About', path: '/#about' },
   { id: 'projects', label: 'Projects', path: '/projects', isRoute: true },
-  { id: 'skills', label: 'Stack', path: '/#skills' },
   { id: 'experience', label: 'Experience', path: '/#experience' },
   { id: 'contact', label: 'Contact', path: '/#contact' },
 ];
@@ -24,7 +22,7 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const activeSection = useActiveSection(['hero', 'about', 'featured-projects', 'skills', 'experience', 'contact'], 'hero');
+  const activeSection = useActiveSection(['hero', 'projects', 'experience', 'contact'], 'hero');
 
   const isProjectsPage = location.pathname === '/projects';
 

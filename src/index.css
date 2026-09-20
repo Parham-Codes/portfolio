@@ -19,10 +19,75 @@
   }
 }
 
+/* Smooth ambient floating glow animation */
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(25px, -20px) scale(1.08);
+  }
+}
+
+@keyframes floatOrbReverse {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-20px, 25px) scale(1.06);
+  }
+}
+
+/* Shimmer badge / button effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Subtle pulse glow for active project status */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.45);
+  }
+}
+
+.animate-float-slow {
+  animation: floatOrb 18s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatOrbReverse 22s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #38bdf8 0%, #ffffff 50%, #38bdf8 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 6s linear infinite;
+}
+
+.card-hover-glow {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-hover-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -10px rgba(56, 189, 248, 0.15), 0 0 0 1px rgba(56, 189, 248, 0.3);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -31,5 +96,5 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

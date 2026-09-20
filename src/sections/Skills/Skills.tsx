@@ -178,22 +178,22 @@ export const Skills: React.FC = () => {
                 {tierData.skills.map((skill, sIdx) => (
                   <div
                     key={sIdx}
-                    className="p-2.5 sm:p-3 rounded-xl bg-[#1c2028]/80 border border-white/[0.04] hover:border-white/[0.12] transition-colors flex flex-col gap-1.5"
+                    className="p-2.5 sm:p-3 rounded-xl bg-[#1c2028]/80 border border-white/[0.04] hover:border-white/[0.15] hover:bg-[#202530] transition-all duration-200 flex flex-col gap-1.5 group/skill"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-sans text-xs sm:text-[13px] text-[#dfe2ee] font-semibold flex items-center gap-2 truncate">
+                      <span className="font-sans text-xs sm:text-[13px] text-[#dfe2ee] font-semibold flex items-center gap-2 truncate group-hover/skill:text-white">
                         {getSkillIcon(skill.icon)}
                         <span className="truncate">{skill.name}</span>
                       </span>
-                      <span className={`font-mono text-xs font-bold shrink-0 ${skill.color}`}>
+                      <span className={`font-mono text-xs font-bold shrink-0 ${skill.color} group-hover/skill:scale-105 transition-transform`}>
                         {skill.proficiency}%
                       </span>
                     </div>
 
                     {/* Visual Progress Bar */}
-                    <div className="w-full h-1 bg-[#262a33] rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-[#262a33] rounded-full overflow-hidden">
                       <div
-                        className={`h-full rounded-full transition-all duration-500 ${colors.bar}`}
+                        className={`h-full rounded-full transition-all duration-700 ease-out group-hover/skill:brightness-125 ${colors.bar}`}
                         style={{ width: `${skill.proficiency}%` }}
                       />
                     </div>
