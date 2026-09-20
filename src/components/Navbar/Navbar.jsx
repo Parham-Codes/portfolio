@@ -58,25 +58,35 @@ export const Navbar = () => {
     <>
       <header className="fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-2 sm:pt-3 px-2 sm:px-6">
         <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
-          {/* Logo */}
-          <Link
-            to="/"
-            onClick={() => {
-              setMobileMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="flex items-center gap-2 sm:gap-2.5 shrink-0 group focus:outline-none"
-          >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#6366f1] flex items-center justify-center text-[#0a0e16] shadow-md shadow-[#38bdf8]/20 group-hover:scale-105 transition-transform">
-              <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-            </div>
-            <div className="flex items-center gap-1 sm:gap-1.5">
-              <span className="font-display text-sm sm:text-lg font-bold text-[#dfe2ee] tracking-tight">
+          {/* Logo & Open to Work Badge */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <Link
+              to="/"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none"
+            >
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#6366f1] flex items-center justify-center text-[#0a0e16] shadow-md shadow-[#38bdf8]/20 group-hover:scale-105 transition-transform shrink-0">
+                <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+              </div>
+              <span className="font-display text-sm sm:text-base md:text-lg font-bold text-[#dfe2ee] tracking-tight leading-none">
                 Parham <span className="text-[#38bdf8]">Taghikhani</span>
               </span>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#56e5a9] animate-pulse" />
+            </Link>
+
+            {/* Open to Work Badge - perfectly centered vertically, bolder and more substantial */}
+            <div className="inline-flex items-center self-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 shadow-sm shadow-emerald-950/60 backdrop-blur-sm">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <span className="font-mono text-[10px] sm:text-[11px] font-extrabold text-emerald-300 tracking-wider uppercase whitespace-nowrap leading-none">
+                Open to Work
+              </span>
             </div>
-          </Link>
+          </div>
 
           {/* Desktop Nav Items */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#121620]/60 p-1 rounded-full border border-white/[0.05]">
@@ -169,10 +179,15 @@ export const Navbar = () => {
             <span className="font-mono text-xs text-[#38bdf8] uppercase tracking-wider font-semibold">
               Navigation Menu
             </span>
-            <span className="font-mono text-xs text-[#56e5a9] flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#56e5a9] animate-pulse" />
-              Available for hire
-            </span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/35 shadow-sm shadow-emerald-950/40">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <span className="font-mono text-[10px] font-bold text-emerald-300 tracking-wide uppercase whitespace-nowrap">
+                Open to Work
+              </span>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1">

@@ -19,7 +19,7 @@ export const SectionTitle = ({
   return (
     <div
       className={cn(
-        'flex flex-col md:flex-row gap-4 mb-8 md:mb-12',
+        'flex flex-col md:flex-row gap-2.5 sm:gap-3',
         rightElement ? 'md:items-end md:justify-between' : '',
         align === 'center' ? 'items-center text-center' : 'items-start',
         className

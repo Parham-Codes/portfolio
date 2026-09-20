@@ -166,7 +166,7 @@ export const ProjectsPage = () => {
             Have an opportunity or project?
           </h3>
           <p className="font-sans text-xs sm:text-sm text-[#bdc8d1] max-w-xl">
-            Open to Front-End opportunities, freelance projects, and collaborative web development. Let's talk!
+            Open to Front-End opportunities, freelance projects, and collaborative web development.
           </p>
         </div>
         <Link

@@ -157,34 +157,6 @@ export const ProjectCard = ({ project, reversed = false }) => {
             </p>
           </div>
 
-          {/* Unified API Companion Info for ForTech */}
-          {project.apiRepoUrl && (
-            <div className="p-3.5 rounded-xl bg-[#121620] border border-[#38bdf8]/30 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-lg bg-[#38bdf8]/15 border border-[#38bdf8]/30 flex items-center justify-center shrink-0">
-                  <Server className="w-4 h-4 text-[#38bdf8]" />
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className="font-mono text-[10px] text-[#87929a] uppercase font-bold tracking-wider">
-                    Companion API / Data Layer
-                  </span>
-                  <span className="font-sans text-xs text-[#dfe2ee] font-semibold truncate">
-                    JSON Server Mock REST Endpoints &amp; db.json
-                  </span>
-                </div>
-              </div>
-              <a
-                href={project.apiRepoUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="shrink-0 font-mono text-[11px] text-[#38bdf8] hover:text-white flex items-center gap-1.5 font-semibold px-3 py-1.5 rounded-lg bg-[#1c2028] border border-white/10 hover:border-[#38bdf8]/50 transition-all shadow-sm"
-              >
-                <span>API Repo</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          )}
-
           {/* 2-4 Concrete Features */}
           <div className="p-3.5 sm:p-4 rounded-xl bg-[#1c2028]/80 border border-white/[0.06] flex flex-col gap-2">
             <span className="font-mono text-xs text-[#87929a] font-semibold uppercase tracking-wider">
@@ -214,7 +186,7 @@ export const ProjectCard = ({ project, reversed = false }) => {
             ))}
           </div>
 
-          {/* Clean Action Buttons */}
+          {/* Focused Action Buttons (Priority: View Project -> Live Demo -> GitHub -> API Repository) */}
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
             <Button
               variant={accentStyles.btnVariant}
@@ -238,17 +210,19 @@ export const ProjectCard = ({ project, reversed = false }) => {
                 Live Demo
               </Button>
             )}
-            <Button
-              variant="secondary"
-              size="sm"
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              icon={<Github className="w-4 h-4" />}
-              className="w-full sm:w-auto"
-            >
-              {project.apiRepoUrl ? 'Frontend Repo' : 'GitHub'}
-            </Button>
+            {project.githubUrl && (
+              <Button
+                variant="secondary"
+                size="sm"
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                icon={<Github className="w-4 h-4" />}
+                className="w-full sm:w-auto"
+              >
+                GitHub
+              </Button>
+            )}
             {project.apiRepoUrl && (
               <Button
                 variant="secondary"
@@ -538,17 +512,19 @@ export const ProjectCard = ({ project, reversed = false }) => {
                   Live Demo
                 </Button>
               )}
-              <Button
-                variant="primary"
-                size="sm"
-                href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                icon={<Github className="w-4 h-4" />}
-                className="w-full sm:w-auto"
-              >
-                {project.apiRepoUrl ? 'Frontend Repository' : 'GitHub Repository'}
-              </Button>
+              {project.githubUrl && (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  icon={<Github className="w-4 h-4" />}
+                  className="w-full sm:w-auto"
+                >
+                  GitHub
+                </Button>
+              )}
               {project.apiRepoUrl && (
                 <Button
                   variant="secondary"
@@ -559,7 +535,7 @@ export const ProjectCard = ({ project, reversed = false }) => {
                   icon={<Server className="w-4 h-4 text-[#38bdf8]" />}
                   className="w-full sm:w-auto text-[#38bdf8] border-[#38bdf8]/30 hover:border-[#38bdf8]"
                 >
-                  API / Backend Repository
+                  API Repository
                 </Button>
               )}
             </div>

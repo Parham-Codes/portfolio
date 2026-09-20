@@ -106,7 +106,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 flex flex-col gap-10">
+    <section id="contact" className="py-12 md:py-18 flex flex-col gap-6 sm:gap-8">
       <SectionTitle
         eyebrow="Get In Touch"
         title="Let’s Discuss Your Next Project"

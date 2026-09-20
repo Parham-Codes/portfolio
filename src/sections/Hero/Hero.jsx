@@ -12,13 +12,13 @@ export const Hero = () => {
   return (
     <section id="hero" className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 flex flex-col items-start gap-8 sm:gap-10">
       {/* Availability / Status Pill */}
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1c2028]/80 border border-white/[0.08] shadow-sm backdrop-blur-sm sm:backdrop-blur-xl">
+      <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/35 shadow-sm shadow-emerald-950/50 backdrop-blur-md">
         <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#56e5a9] opacity-75" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#56e5a9]" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
         </span>
-        <span className="font-mono text-xs font-semibold text-[#56e5a9] tracking-wider uppercase">
-          OPEN TO FRONT-END OPPORTUNITIES &amp; FREELANCE PROJECTS
+        <span className="font-mono text-xs font-bold text-emerald-300 tracking-wide uppercase">
+          Open to Work
         </span>
       </div>
 
