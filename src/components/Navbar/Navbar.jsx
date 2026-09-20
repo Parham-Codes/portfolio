@@ -7,7 +7,7 @@ import { cn } from '../../utils/cn.js';
 import { smoothEase } from '../../utils/animations.jsx';
 
 const navItems = [
-  { id: 'hero', label: 'Overview', path: '/#hero' },
+  { id: 'hero', label: 'Overview', path: '/' },
   { id: 'projects', label: 'Projects', path: '/projects', isRoute: true },
   { id: 'experience', label: 'Experience', path: '/#experience' },
   { id: 'contact', label: 'Contact', path: '/#contact' },
@@ -33,6 +33,14 @@ export const Navbar = () => {
     }
 
     e.preventDefault();
+    if (item.path === '/') {
+      if (location.pathname !== '/') {
+        navigate('/');
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return;
+    }
+
     if (location.pathname !== '/') {
       navigate(item.path);
     } else {

@@ -81,7 +81,7 @@ export const Hero = () => {
       initial={shouldReduceMotion ? false : "hidden"}
       animate="visible"
       variants={heroContainerVariants}
-      className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 flex flex-col items-start gap-8 sm:gap-10"
+      className="relative pt-4 sm:pt-8 pb-12 sm:pb-16 flex flex-col items-start gap-8 sm:gap-10 scroll-mt-28"
     >
       {/* 1. Availability / Status Pill */}
       <motion.div
