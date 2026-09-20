@@ -1,16 +1,47 @@
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Layers, Github, ExternalLink } from 'lucide-react';
 import { Button } from '../../components/Button/Button.jsx';
 import { projects } from '../../data/projects.js';
+import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
 export const ProjectsCTA = () => {
+  const shouldReduceMotion = useReducedMotion();
   // Take top 3 featured projects
   const displayProjects = projects.slice(0, 3);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: smoothEase,
+      },
+    },
+  };
 
   return (
     <section id="projects-cta" className="py-12 sm:py-16 flex flex-col gap-8">
       {/* Header */}
-      <div className="flex flex-col gap-2">
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.5, ease: smoothEase }}
+        className="flex flex-col gap-2"
+      >
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[#38bdf8] flex items-center gap-1.5">
             <Layers className="w-3.5 h-3.5" />
@@ -23,17 +54,26 @@ export const ProjectsCTA = () => {
         <p className="font-sans text-sm sm:text-base text-[#bdc8d1] leading-relaxed max-w-2xl">
           A few things I've built with React, modern JavaScript, and web technologies.
         </p>
-      </div>
+      </motion.div>
 
-      {/* 3 Simple Project Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-stretch">
+      {/* 3 Simple Project Cards with Stagger */}
+      <motion.div
+        variants={containerVariants}
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-stretch"
+      >
         {displayProjects.map((project) => {
           const mainStacks = (project.technologies || []).slice(0, 4);
 
           return (
-            <div
+            <motion.div
               key={project.id}
-              className="rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md overflow-hidden flex flex-col justify-between hover:border-[#38bdf8]/40 transition-all duration-300 shadow-xl group"
+              variants={cardVariants}
+              whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md overflow-hidden flex flex-col justify-between hover:border-[#38bdf8]/40 transition-colors duration-300 shadow-xl group"
             >
               {/* Image on top */}
               <div className="w-full h-44 sm:h-48 overflow-hidden bg-[#121620] relative">
@@ -93,13 +133,19 @@ export const ProjectsCTA = () => {
                   </a>
                 )}
               </div>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
 
       {/* Explore CTA Banner */}
-      <div className="rounded-2xl sm:rounded-3xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.5, ease: smoothEase }}
+        className="rounded-2xl sm:rounded-3xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+      >
         <div className="flex flex-col gap-1.5 max-w-2xl">
           <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#dfe2ee]">
             Want to see all projects and technical details?
@@ -121,7 +167,7 @@ export const ProjectsCTA = () => {
             Explore My Projects
           </Button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import {
   Send,
   Mail,
@@ -14,8 +15,10 @@ import { SectionTitle } from '../../components/SectionTitle/SectionTitle.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 import { useClipboard } from '../../hooks/useClipboard.js';
 import { emailjsConfig } from '../../config/emailjs.js';
+import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
 export const Contact = () => {
+  const shouldReduceMotion = useReducedMotion();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -105,19 +108,57 @@ export const Contact = () => {
     }
   };
 
+  const cardsContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: smoothEase,
+      },
+    },
+  };
+
   return (
     <section id="contact" className="py-12 md:py-18 flex flex-col gap-6 sm:gap-8">
-      <SectionTitle
-        eyebrow="Get In Touch"
-        title="Let’s Discuss Your Next Project"
-        description="Whether you have an open Front-End position, a freelance project, or just want to connect, feel free to reach out directly or use the contact form."
-      />
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.5, ease: smoothEase }}
+      >
+        <SectionTitle
+          eyebrow="Get In Touch"
+          title="Let’s Discuss Your Next Project"
+          description="Whether you have an open Front-End position, a freelance project, or just want to connect, feel free to reach out directly or use the contact form."
+        />
+      </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Contact Info Column */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
+        {/* Contact Info Column (staggered cards) */}
+        <motion.div
+          variants={cardsContainerVariants}
+          initial={shouldReduceMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="lg:col-span-5 flex flex-col gap-4"
+        >
           {/* Telegram Card */}
-          <div className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow">
+          <motion.div
+            variants={cardVariants}
+            className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#38bdf8]/10 text-[#38bdf8] flex items-center justify-center border border-[#38bdf8]/20 group-hover:scale-105 transition-transform">
@@ -152,10 +193,13 @@ export const Contact = () => {
             <p className="font-sans text-xs text-[#87929a] leading-relaxed">
               Fastest way to reach me for direct messaging, project questions, and quick updates.
             </p>
-          </div>
+          </motion.div>
 
           {/* Email Card */}
-          <div className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow">
+          <motion.div
+            variants={cardVariants}
+            className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#c0c1ff]/10 text-[#c0c1ff] flex items-center justify-center border border-[#c0c1ff]/20 group-hover:scale-105 transition-transform">
@@ -188,10 +232,13 @@ export const Contact = () => {
             <p className="font-sans text-xs text-[#87929a] leading-relaxed">
               For formal inquiries, detailed project briefs, or recruitment opportunities.
             </p>
-          </div>
+          </motion.div>
 
           {/* GitHub Card */}
-          <div className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow">
+          <motion.div
+            variants={cardVariants}
+            className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center border border-white/20 group-hover:scale-105 transition-transform">
@@ -215,11 +262,17 @@ export const Contact = () => {
             <p className="font-sans text-xs text-[#87929a] leading-relaxed">
               Explore public repositories, commits, and codebase architectures.
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Contact Form Column */}
-        <div className="lg:col-span-7 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl p-6 sm:p-8 shadow-xl">
+        {/* Contact Form Column (single container animation, no per-field animation) */}
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
+          className="lg:col-span-7 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl p-6 sm:p-8 shadow-xl"
+        >
           <h3 className="font-display text-xl font-bold text-[#dfe2ee] mb-1">
             Send a Direct Message
           </h3>
@@ -350,7 +403,7 @@ export const Contact = () => {
               {status === 'loading' ? 'Sending Message...' : 'Send Message'}
             </Button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'motion/react';
 import {
   Search,
   ArrowRight,
@@ -8,8 +9,10 @@ import {
 } from 'lucide-react';
 import { ProjectCard } from '../../components/ProjectCard/ProjectCard.jsx';
 import { projects } from '../../data/projects.js';
+import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
 export const ProjectsPage = () => {
+  const shouldReduceMotion = useReducedMotion();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -49,7 +52,12 @@ export const ProjectsPage = () => {
   return (
     <div className="py-8 sm:py-12 flex flex-col gap-10 sm:gap-14">
       {/* Page Header */}
-      <div className="flex flex-col gap-4 max-w-3xl">
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: smoothEase }}
+        className="flex flex-col gap-4 max-w-3xl"
+      >
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/30 font-mono text-xs text-[#38bdf8] font-bold flex items-center gap-1.5">
             <Layers className="w-3.5 h-3.5" />
@@ -67,10 +75,15 @@ export const ProjectsPage = () => {
         <p className="font-sans text-sm sm:text-base text-[#bdc8d1] leading-relaxed">
           Explore my key projects built with React, Redux Toolkit, and modern JavaScript, with clean architectures, e-commerce workflows, and REST API integration.
         </p>
-      </div>
+      </motion.div>
 
       {/* Search & Filter Toolbar */}
-      <div className="rounded-2xl bg-[#181c24]/80 border border-white/[0.08] p-4 sm:p-5 backdrop-blur-xl flex flex-col gap-4 shadow-xl">
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.08, ease: smoothEase }}
+        className="rounded-2xl bg-[#181c24]/80 border border-white/[0.08] p-4 sm:p-5 backdrop-blur-xl flex flex-col gap-4 shadow-xl"
+      >
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
           {/* Search Field */}
           <div className="relative flex-1">
@@ -129,7 +142,7 @@ export const ProjectsPage = () => {
             );
           })}
         </div>
-      </div>
+      </motion.div>
 
       {/* Projects List */}
       <div className="flex flex-col gap-8 md:gap-12">
@@ -160,7 +173,13 @@ export const ProjectsPage = () => {
       </div>
 
       {/* Bottom Conversion Prompt */}
-      <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#181c24] via-[#1c2028] to-[#181c24] border border-white/10 p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left mt-4">
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.5, ease: smoothEase }}
+        className="rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#181c24] via-[#1c2028] to-[#181c24] border border-white/10 p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left mt-4"
+      >
         <div className="flex flex-col gap-2">
           <h3 className="font-display text-xl sm:text-2xl font-bold text-[#dfe2ee]">
             Have an opportunity or project?
@@ -176,7 +195,7 @@ export const ProjectsPage = () => {
           <span>Send Me a Message</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 };

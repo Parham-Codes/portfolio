@@ -1,13 +1,23 @@
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Terminal, Github, Send, Mail, ArrowUp } from 'lucide-react';
+import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
 export const Footer = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="relative z-10 w-full bg-[#0a0e16]/90 border-t border-white/[0.08] backdrop-blur-md mt-16 sm:mt-24">
+    <motion.footer
+      initial={shouldReduceMotion ? false : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={defaultViewport}
+      transition={{ duration: 0.45, ease: smoothEase }}
+      className="relative z-10 w-full bg-[#0a0e16]/90 border-t border-white/[0.08] backdrop-blur-md mt-16 sm:mt-24"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col lg:flex-row items-center justify-between gap-5 sm:gap-6">
         {/* Brand & Subtitle & Status Badge */}
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-center sm:text-left">
@@ -97,6 +107,6 @@ export const Footer = () => {
           &copy; 2026
         </p>
       </div>
-    </footer>
+    </motion.footer>
   );
 };

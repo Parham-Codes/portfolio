@@ -1,21 +1,61 @@
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle.jsx';
 import { experience } from '../../data/experience.js';
+import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
 export const Experience = () => {
+  const shouldReduceMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: smoothEase,
+      },
+    },
+  };
+
   return (
     <section id="experience" className="py-10 sm:py-14 flex flex-col gap-4 sm:gap-5">
-      <SectionTitle
-        eyebrow="Experience"
-        title="Development Experience"
-        description="Practical experience developing responsive React interfaces, customizing WordPress &amp; WooCommerce sites, and connecting REST APIs."
-      />
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.5, ease: smoothEase }}
+      >
+        <SectionTitle
+          eyebrow="Experience"
+          title="Development Experience"
+          description="Practical experience developing responsive React interfaces, customizing WordPress &amp; WooCommerce sites, and connecting REST APIs."
+        />
+      </motion.div>
 
       {/* Visual Timeline - Compact */}
-      <div className="relative pl-6 sm:pl-8 flex flex-col gap-5 sm:gap-6 before:absolute before:left-[9px] sm:before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-white/10">
+      <motion.div
+        variants={containerVariants}
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="relative pl-6 sm:pl-8 flex flex-col gap-5 sm:gap-6 before:absolute before:left-[9px] sm:before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-white/10"
+      >
         {experience.map((item, idx) => (
-          <div
+          <motion.div
             key={idx}
+            variants={itemVariants}
             className="relative flex flex-col gap-2 group p-4 sm:p-5 rounded-xl bg-[#181c24]/60 hover:bg-[#181c24]/90 border border-white/[0.06] hover:border-white/[0.12] transition-all duration-200"
           >
             {/* Timeline Node */}
@@ -56,9 +96,9 @@ export const Experience = () => {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

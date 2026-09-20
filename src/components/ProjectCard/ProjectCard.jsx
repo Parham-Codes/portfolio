@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { createPortal } from 'react-dom';
 import {
   ExternalLink,
@@ -19,8 +20,10 @@ import {
 } from 'lucide-react';
 import { Button } from '../Button/Button.jsx';
 import { cn } from '../../utils/cn.js';
+import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
 export const ProjectCard = ({ project, reversed = false }) => {
+  const shouldReduceMotion = useReducedMotion();
   const [activeModal, setActiveModal] = useState(false);
 
   const accentStyleMap = {
@@ -101,10 +104,14 @@ export const ProjectCard = ({ project, reversed = false }) => {
 
   return (
     <>
-      <div
+      <motion.div
         id={project.id}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.5, ease: smoothEase }}
         className={cn(
-          'group rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl transform-gpu p-4 sm:p-7 md:p-8 lg:p-10 shadow-2xl flex flex-col gap-6 sm:gap-8 items-center transition-all duration-300 card-hover-glow',
+          'group rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl transform-gpu p-4 sm:p-7 md:p-8 lg:p-10 shadow-2xl flex flex-col gap-6 sm:gap-8 items-center transition-colors duration-300 card-hover-glow',
           reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
         )}
       >
@@ -300,7 +307,7 @@ export const ProjectCard = ({ project, reversed = false }) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Modal Preview — Rendered directly at document.body via Portal to guarantee it sits above header */}
       {activeModal &&

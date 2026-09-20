@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion, useReducedMotion } from 'motion/react';
 import { Terminal, Github, Menu, X, ArrowUpRight, Layers } from 'lucide-react';
 import { useActiveSection } from '../../hooks/useActiveSection.js';
 import { cn } from '../../utils/cn.js';
+import { smoothEase } from '../../utils/animations.jsx';
 
 const navItems = [
   { id: 'hero', label: 'Overview', path: '/#hero' },
@@ -18,6 +20,7 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const activeSection = useActiveSection(SECTION_IDS, 'hero');
+  const shouldReduceMotion = useReducedMotion();
 
   const isProjectsPage = location.pathname === '/projects';
 
@@ -56,7 +59,12 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-2 sm:pt-3 px-2 sm:px-6">
+      <motion.header
+        initial={shouldReduceMotion ? false : { opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: smoothEase }}
+        className="fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-2 sm:pt-3 px-2 sm:px-6"
+      >
         <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
           {/* Logo & Open to Work Badge */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -161,7 +169,7 @@ export const Navbar = () => {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Backdrop for Mobile Drawer */}
       {mobileMenuOpen && (
