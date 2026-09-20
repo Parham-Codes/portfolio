@@ -58,6 +58,22 @@ export const Footer: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Developer Credit Line */}
+      <div className="border-t border-white/[0.04] py-4 px-4 text-center">
+        <p className="font-mono text-[11px] sm:text-xs text-[#87929a]/70 tracking-wide">
+          Designed &amp; Built by{' '}
+          <a
+            href="https://github.com/Parham-Codes"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[#dfe2ee] hover:text-[#38bdf8] font-medium transition-colors underline-offset-4 hover:underline"
+          >
+            Parham Taghikhani
+          </a>{' '}
+          &copy; 2026
+        </p>
+      </div>
     </footer>
   );
 };
