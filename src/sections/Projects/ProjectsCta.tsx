@@ -5,7 +5,7 @@ import { Button } from '../../components/Button/Button.tsx';
 export const ProjectsCta: React.FC = () => {
   return (
     <section id="projects" className="py-12 sm:py-16">
-      <div className="rounded-2xl bg-[#181c24]/80 border border-white/[0.08] backdrop-blur-xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="rounded-2xl bg-[#181c24]/80 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl transform-gpu p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex flex-col gap-2 max-w-xl">
           <span className="font-mono text-xs font-semibold text-[#38bdf8] uppercase tracking-widest flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />

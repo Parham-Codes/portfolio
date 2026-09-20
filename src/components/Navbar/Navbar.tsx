@@ -18,11 +18,13 @@ const navItems: NavItem[] = [
   { id: 'contact', label: 'Contact', path: '/#contact' },
 ];
 
+const SECTION_IDS = ['hero', 'projects', 'experience', 'contact'];
+
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const activeSection = useActiveSection(['hero', 'projects', 'experience', 'contact'], 'hero');
+  const activeSection = useActiveSection(SECTION_IDS, 'hero');
 
   const isProjectsPage = location.pathname === '/projects';
 
@@ -62,7 +64,7 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-2 sm:pt-3 px-2 sm:px-6">
-        <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
+        <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
           {/* Logo */}
           <Link
             to="/"
@@ -77,7 +79,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div className="flex items-center gap-1 sm:gap-1.5">
               <span className="font-display text-sm sm:text-lg font-bold text-[#dfe2ee] tracking-tight">
-                Parham<span className="text-[#38bdf8]">.dev</span>
+                Parham <span className="text-[#38bdf8]">Taghikhani</span>
               </span>
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#56e5a9] animate-pulse" />
             </div>
@@ -169,7 +171,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed top-18 sm:top-20 inset-x-3 sm:inset-x-4 max-w-md mx-auto z-50 rounded-2xl bg-[#181c24]/98 border border-white/15 backdrop-blur-2xl p-4 sm:p-5 shadow-2xl flex flex-col gap-3 animate-fade-in">
+        <div className="lg:hidden fixed top-18 sm:top-20 inset-x-3 sm:inset-x-4 max-w-md mx-auto z-50 rounded-2xl bg-[#181c24]/98 border border-white/15 backdrop-blur-lg p-4 sm:p-5 shadow-2xl flex flex-col gap-3 animate-fade-in">
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <span className="font-mono text-xs text-[#38bdf8] uppercase tracking-wider font-semibold">
               Navigation Menu

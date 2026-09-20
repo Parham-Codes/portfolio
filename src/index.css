@@ -19,22 +19,22 @@
   }
 }
 
-/* Smooth ambient floating glow animation */
+/* Smooth ambient floating glow animation (compositor only, no geometry scale) */
 @keyframes floatOrb {
   0%, 100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0);
   }
   50% {
-    transform: translate(25px, -20px) scale(1.08);
+    transform: translate3d(25px, -20px, 0);
   }
 }
 
 @keyframes floatOrbReverse {
   0%, 100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0);
   }
   50% {
-    transform: translate(-20px, 25px) scale(1.06);
+    transform: translate3d(-20px, 25px, 0);
   }
 }
 
@@ -79,9 +79,11 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
-.card-hover-glow:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px -10px rgba(56, 189, 248, 0.15), 0 0 0 1px rgba(56, 189, 248, 0.3);
+@media (hover: hover) {
+  .card-hover-glow:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -10px rgba(56, 189, 248, 0.15), 0 0 0 1px rgba(56, 189, 248, 0.3);
+  }
 }
 
 @keyframes fadeIn {

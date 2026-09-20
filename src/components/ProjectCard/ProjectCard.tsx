@@ -110,7 +110,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
       <div
         id={project.id}
         className={cn(
-          'group rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl p-4 sm:p-7 md:p-8 lg:p-10 shadow-2xl flex flex-col gap-6 sm:gap-8 items-center transition-all duration-300 card-hover-glow',
+          'group rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl transform-gpu p-4 sm:p-7 md:p-8 lg:p-10 shadow-2xl flex flex-col gap-6 sm:gap-8 items-center transition-all duration-300 card-hover-glow',
           reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
         )}
       >
@@ -294,13 +294,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
             <img
               src={project.image}
               alt={project.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
             />
             {/* Dark vignette gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e16] via-[#0a0e16]/20 to-transparent" />
 
             {/* Overlay Info Card */}
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 p-2.5 sm:p-3.5 rounded-xl bg-[#0f131c]/95 border border-white/[0.1] backdrop-blur-xl shadow-xl flex items-center justify-between gap-2">
+            <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 p-2.5 sm:p-3.5 rounded-xl bg-[#0f131c]/95 border border-white/[0.1] backdrop-blur-md sm:backdrop-blur-xl shadow-xl flex items-center justify-between gap-2">
               <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                 <div
                   className={cn(
@@ -378,7 +380,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, reversed = fa
 
               {/* Image Preview */}
               <div className="rounded-xl overflow-hidden border border-white/10 max-h-52 sm:max-h-64">
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
 
             {/* Accuracy Note Banner */}

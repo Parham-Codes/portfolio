@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
               <Terminal className="w-4 h-4" />
             </span>
             <span>
-              Parham<span className="text-[#38bdf8]">.dev</span>
+              Parham <span className="text-[#38bdf8]">Taghikhani</span>
             </span>
           </div>
           <span className="hidden sm:inline text-[#3e484f] font-mono">•</span>
@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
           </a>
           <span className="text-[#3e484f]">•</span>
           <a
-            href="https://t.me/ParhamTGK"
+            href="https://t.me/ItsParhamDev"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1.5 hover:text-[#38bdf8] transition-colors"

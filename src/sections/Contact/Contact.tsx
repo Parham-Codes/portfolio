@@ -5,7 +5,6 @@ import {
   Copy,
   Check,
   Github,
-  Linkedin,
   Send,
   ArrowRight,
   ArrowUpRight,
@@ -192,9 +191,9 @@ export const Contact: React.FC = () => {
     {
       id: '02',
       label: 'Telegram',
-      value: '@ParhamTGK',
+      value: '@ItsParhamDev',
       description: 'Fast response / Direct message',
-      href: 'https://t.me/ParhamTGK',
+      href: 'https://t.me/ItsParhamDev',
       isExternal: true,
       isEmail: false,
       icon: Send,
@@ -212,18 +211,6 @@ export const Contact: React.FC = () => {
       icon: Github,
       iconColor: 'text-[#dfe2ee]',
       badgeBg: 'bg-white/10 border-white/15',
-    },
-    {
-      id: '04',
-      label: 'LinkedIn',
-      value: 'parham-taghikhani',
-      description: 'Connect with me professionally',
-      href: 'https://www.linkedin.com/in/parham-taghikhani',
-      isExternal: true,
-      isEmail: false,
-      icon: Linkedin,
-      iconColor: 'text-[#38bdf8]',
-      badgeBg: 'bg-[#38bdf8]/10 border-[#38bdf8]/20',
     },
   ];
 
@@ -246,7 +233,7 @@ export const Contact: React.FC = () => {
       {/* Two-Column Grid: Form (Left ~60%) | Contact Methods (Right ~40%) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
         {/* Left Column: Contact Form */}
-        <div className="lg:col-span-7 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-xl p-6 sm:p-8 shadow-xl flex flex-col gap-5">
+        <div className="lg:col-span-7 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl transform-gpu p-6 sm:p-8 shadow-xl flex flex-col gap-5">
           {/* Subtle Success Toast / Message */}
           {status === 'success' && (
             <div
