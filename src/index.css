@@ -101,3 +101,59 @@
 .animate-fade-in {
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Premium Developer Ambient Background Animations */
+@keyframes ambientDriftSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(32px, -24px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes ambientDriftReverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(-26px, 30px, 0);
+    opacity: 0.95;
+  }
+}
+
+@keyframes ambientPulseSlow {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale3d(1.05, 1.05, 1);
+  }
+}
+
+.animate-ambient-slow {
+  animation: ambientDriftSlow 28s ease-in-out infinite;
+}
+
+.animate-ambient-reverse {
+  animation: ambientDriftReverse 34s ease-in-out infinite;
+}
+
+.animate-ambient-pulse {
+  animation: ambientPulseSlow 22s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-ambient-slow,
+  .animate-ambient-reverse,
+  .animate-ambient-pulse {
+    animation: none !important;
+  }
+}

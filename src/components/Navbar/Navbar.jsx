@@ -7,8 +7,8 @@ import { cn } from '../../utils/cn.js';
 import { smoothEase } from '../../utils/animations.jsx';
 
 const navItems = [
-  { id: 'hero', label: 'Overview', path: '/' },
-  { id: 'projects', label: 'Projects', path: '/projects', isRoute: true },
+  { id: 'hero', label: 'Home', path: '/' },
+  { id: 'projects', label: 'Development', path: '/projects', isRoute: true },
   { id: 'wordpress', label: 'WordPress', path: '/wordpress', isRoute: true },
   { id: 'experience', label: 'Experience', path: '/#experience' },
   { id: 'contact', label: 'Contact', path: '/#contact' },
@@ -265,13 +265,7 @@ export const Navbar = () => {
                       ) : (
                         <Layers className="w-4 h-4" />
                       )}
-                      <span>
-                        {item.id === 'projects'
-                          ? 'Coding Projects (Hub)'
-                          : item.id === 'wordpress'
-                          ? 'WordPress Projects'
-                          : item.label}
-                      </span>
+                      <span>{item.label}</span>
                     </div>
                     <ArrowUpRight className={cn('w-4 h-4', isActive ? 'text-[#00354a]' : 'opacity-70')} />
                   </Link>
