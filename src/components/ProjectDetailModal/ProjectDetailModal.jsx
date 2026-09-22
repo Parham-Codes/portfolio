@@ -209,6 +209,9 @@ export const ProjectDetailModal = ({
                     <img
                       src={activeImage}
                       alt={project.title}
+                      decoding="async"
+                      width="800"
+                      height="500"
                       className="w-full h-full object-cover object-top transition-transform duration-500"
                     />
 
@@ -263,6 +266,10 @@ export const ProjectDetailModal = ({
                           <img
                             src={img}
                             alt={`${project.title} thumb ${idx + 1}`}
+                            loading="lazy"
+                            decoding="async"
+                            width="80"
+                            height="50"
                             className="w-full h-full object-cover object-top"
                           />
                         </button>

@@ -107,17 +107,26 @@ export function useActiveSection(sectionIds, defaultSection = 'hero') {
 
     initObserver();
 
-    // Scroll listener for top and bottom boundaries
+    // Throttled scroll listener using requestAnimationFrame for zero-layout-thrashing 60/120fps scrolling
+    let ticking = false;
+    let rafId = null;
+
     const handleScroll = () => {
-      if (window.scrollY < 120) {
-        setActiveSection(defaultSection);
-        return;
-      }
-      const isAtBottom =
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 100;
-      if (isAtBottom && sectionIds.includes('contact')) {
-        setActiveSection('contact');
+      if (!ticking) {
+        rafId = window.requestAnimationFrame(() => {
+          if (window.scrollY < 120) {
+            setActiveSection(defaultSection);
+          } else {
+            const isAtBottom =
+              window.innerHeight + window.scrollY >=
+              document.documentElement.scrollHeight - 100;
+            if (isAtBottom && sectionIds.includes('contact')) {
+              setActiveSection('contact');
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -126,6 +135,7 @@ export function useActiveSection(sectionIds, defaultSection = 'hero') {
     return () => {
       cancelled = true;
       if (timerId) clearTimeout(timerId);
+      if (rafId) window.cancelAnimationFrame(rafId);
       if (observer) observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };

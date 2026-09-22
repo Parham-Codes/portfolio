@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import {
   ExternalLink,
@@ -11,9 +11,15 @@ import {
   Images,
 } from 'lucide-react';
 import { Button } from '../Button/Button.jsx';
-import { ProjectDetailModal } from '../ProjectDetailModal/ProjectDetailModal.jsx';
 import { cn } from '../../utils/cn.js';
 import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+
+// Lazy-load modal so it does not inflate the initial bundle or card renders
+const ProjectDetailModal = lazy(() =>
+  import('../ProjectDetailModal/ProjectDetailModal.jsx').then((m) => ({
+    default: m.ProjectDetailModal,
+  }))
+);
 
 /**
  * Unified ShowcaseCard Component
@@ -120,6 +126,9 @@ export const ShowcaseCard = ({
                 src={previewImage}
                 alt={project.title}
                 loading="lazy"
+                decoding="async"
+                width="640"
+                height="400"
                 className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
               />
             ) : (
@@ -287,14 +296,18 @@ export const ShowcaseCard = ({
         </div>
       </motion.article>
 
-      {/* Unified Project Details Modal */}
-      <ProjectDetailModal
-        isOpen={detailsOpen}
-        onClose={() => setDetailsOpen(false)}
-        project={project}
-        type={type}
-        initialImageIndex={initialImageIndex}
-      />
+      {/* Unified Project Details Modal - Rendered on demand */}
+      {detailsOpen && (
+        <Suspense fallback={null}>
+          <ProjectDetailModal
+            isOpen={detailsOpen}
+            onClose={() => setDetailsOpen(false)}
+            project={project}
+            type={type}
+            initialImageIndex={initialImageIndex}
+          />
+        </Suspense>
+      )}
     </>
   );
 };

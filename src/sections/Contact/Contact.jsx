@@ -10,7 +10,6 @@ import {
   Loader2,
   ExternalLink,
 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 import { useClipboard } from '../../hooks/useClipboard.js';
@@ -82,6 +81,8 @@ export const Contact = () => {
     setErrorMessage('');
 
     try {
+      const { default: emailjs } = await import('@emailjs/browser');
+
       const templateParams = {
         from_name: formState.name,
         from_email: formState.email,
