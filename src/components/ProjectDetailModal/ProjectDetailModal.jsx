@@ -18,6 +18,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { Button } from '../Button/Button.jsx';
+import { ProjectPlaceholder } from '../ProjectPlaceholder/ProjectPlaceholder.jsx';
 import { cn } from '../../utils/cn.js';
 import { smoothEase } from '../../utils/animations.jsx';
 
@@ -69,10 +70,12 @@ export const ProjectDetailModal = ({
     : [];
 
   const [activeImageIndex, setActiveImageIndex] = useState(initialImageIndex);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setActiveImageIndex(Math.max(0, Math.min(initialImageIndex, Math.max(0, images.length - 1))));
+      setImageError(false);
     }
   }, [isOpen, initialImageIndex, images.length]);
 
@@ -202,82 +205,91 @@ export const ProjectDetailModal = ({
                 )}
               </div>
 
-              {/* Screenshot / Gallery Viewer */}
-              {activeImage && (
-                <div className="flex flex-col gap-3">
-                  <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#070a12] aspect-[16/10] max-h-[460px] group shadow-inner">
+              {/* Screenshot / Gallery Viewer or Universal Placeholder */}
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#070a12] aspect-[16/10] max-h-[460px] group shadow-inner">
+                  {activeImage && !imageError ? (
                     <img
                       src={activeImage}
                       alt={project.title}
                       decoding="async"
                       width="800"
                       height="500"
+                      onError={() => setImageError(true)}
                       className="w-full h-full object-cover object-top transition-transform duration-500"
                     />
+                  ) : (
+                    <ProjectPlaceholder
+                      title={project.title}
+                      subtitle="اسکرین‌شات‌ها و تصاویر محیط نهایی به‌زودی پس از تکمیل پروژه بارگذاری خواهند شد"
+                      badge={project.hudBadge || (project.status?.includes('Progress') || project.status?.includes('Development') ? 'IN DEVELOPMENT' : 'PREVIEW PENDING')}
+                      accent={project.accent || 'amber'}
+                      compact={false}
+                    />
+                  )}
 
-                    {/* Image navigation buttons if multiple screenshots */}
-                    {images.length > 1 && (
-                      <>
-                        <button
-                          onClick={() =>
-                            setActiveImageIndex((prev) =>
-                              prev === 0 ? images.length - 1 : prev - 1
-                            )
-                          }
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100"
-                          aria-label="Previous image"
-                        >
-                          <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() =>
-                            setActiveImageIndex((prev) =>
-                              prev === images.length - 1 ? 0 : prev + 1
-                            )
-                          }
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100"
-                          aria-label="Next image"
-                        >
-                          <ChevronRight className="w-5 h-5" />
-                        </button>
+                  {/* Image navigation buttons if multiple screenshots */}
+                  {images.length > 1 && !imageError && (
+                    <>
+                      <button
+                        onClick={() =>
+                          setActiveImageIndex((prev) =>
+                            prev === 0 ? images.length - 1 : prev - 1
+                          )
+                        }
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100"
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() =>
+                          setActiveImageIndex((prev) =>
+                            prev === images.length - 1 ? 0 : prev + 1
+                          )
+                        }
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100"
+                        aria-label="Next image"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
 
-                        {/* Image index counter */}
-                        <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] text-[#dfe2ee]">
-                          {activeImageIndex + 1} / {images.length}
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Thumbnail Row if multiple images */}
-                  {images.length > 1 && (
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-                      {images.map((img, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setActiveImageIndex(idx)}
-                          className={cn(
-                            'relative w-16 sm:w-20 aspect-[16/10] rounded-lg overflow-hidden border shrink-0 transition-all cursor-pointer',
-                            activeImageIndex === idx
-                              ? themeStyles.activeThumb
-                              : 'border-white/10 opacity-60 hover:opacity-100'
-                          )}
-                        >
-                          <img
-                            src={img}
-                            alt={`${project.title} thumb ${idx + 1}`}
-                            loading="lazy"
-                            decoding="async"
-                            width="80"
-                            height="50"
-                            className="w-full h-full object-cover object-top"
-                          />
-                        </button>
-                      ))}
-                    </div>
+                      {/* Image index counter */}
+                      <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] text-[#dfe2ee]">
+                        {activeImageIndex + 1} / {images.length}
+                      </div>
+                    </>
                   )}
                 </div>
-              )}
+
+                {/* Thumbnail Row if multiple images */}
+                {images.length > 1 && !imageError && (
+                  <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                    {images.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveImageIndex(idx)}
+                        className={cn(
+                          'relative w-16 sm:w-20 aspect-[16/10] rounded-lg overflow-hidden border shrink-0 transition-all cursor-pointer',
+                          activeImageIndex === idx
+                            ? themeStyles.activeThumb
+                            : 'border-white/10 opacity-60 hover:opacity-100'
+                        )}
+                      >
+                        <img
+                          src={img}
+                          alt={`${project.title} thumb ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
+                          width="80"
+                          height="50"
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {/* Action Links Bar */}
               {(hasLiveUrl || hasGitHubUrl || hasApiRepoUrl) && (

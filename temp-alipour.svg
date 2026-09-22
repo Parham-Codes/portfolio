@@ -1,0 +1,196 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' width='1440' height='900'>
+  <defs>
+    <linearGradient id='bgGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#0a0e17' />
+      <stop offset='50%' stop-color='#111827' />
+      <stop offset='100%' stop-color='#080c14' />
+    </linearGradient>
+    <linearGradient id='amberGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#f59e0b' />
+      <stop offset='50%' stop-color='#d97706' />
+      <stop offset='100%' stop-color='#92400e' />
+    </linearGradient>
+    <linearGradient id='goldGlow' x1='0%' y1='0%' x2='0%' y2='100%'>
+      <stop offset='0%' stop-color='#fbbf24' stop-opacity='0.25' />
+      <stop offset='100%' stop-color='#d97706' stop-opacity='0.0' />
+    </linearGradient>
+    <radialGradient id='spotlight' cx='50%' cy='35%' r='60%'>
+      <stop offset='0%' stop-color='#f59e0b' stop-opacity='0.18' />
+      <stop offset='60%' stop-color='#111827' stop-opacity='0.05' />
+      <stop offset='100%' stop-color='#000000' stop-opacity='0.8' />
+    </radialGradient>
+    <filter id='dropShadow' x='-10%' y='-10%' width='130%' height='130%'>
+      <feDropShadow dx='0' dy='12' stdDeviation='16' flood-color='#000' flood-opacity='0.6' />
+    </filter>
+    <filter id='glow' x='-20%' y='-20%' width='140%' height='140%'>
+      <feGaussianBlur stdDeviation='8' result='blur' />
+      <feComposite in='SourceGraphic' in2='blur' operator='over' />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width='1440' height='900' fill='url(#bgGrad)' />
+  <rect width='1440' height='900' fill='url(#spotlight)' />
+
+  <!-- Subtle Architectural Grid -->
+  <g opacity='0.07' stroke='#cbd5e1' stroke-width='1'>
+    <line x1='0' y1='100' x2='1440' y2='100' />
+    <line x1='0' y1='200' x2='1440' y2='200' />
+    <line x1='0' y1='300' x2='1440' y2='300' />
+    <line x1='0' y1='400' x2='1440' y2='400' />
+    <line x1='0' y1='500' x2='1440' y2='500' />
+    <line x1='0' y1='600' x2='1440' y2='600' />
+    <line x1='0' y1='700' x2='1440' y2='700' />
+    <line x1='0' y1='800' x2='1440' y2='800' />
+    <line x1='180' y1='0' x2='180' y2='900' />
+    <line x1='360' y1='0' x2='360' y2='900' />
+    <line x1='540' y1='0' x2='540' y2='900' />
+    <line x1='720' y1='0' x2='720' y2='900' />
+    <line x1='900' y1='0' x2='900' y2='900' />
+    <line x1='1080' y1='0' x2='1080' y2='900' />
+    <line x1='1260' y1='0' x2='1260' y2='900' />
+  </g>
+
+  <!-- Browser / Store App Header Window Frame -->
+  <rect x='100' y='60' width='1240' height='780' rx='24' fill='#0f141f' stroke='#ffffff' stroke-opacity='0.12' stroke-width='1.5' filter='url(#dropShadow)' />
+
+  <!-- Window Titlebar -->
+  <path d='M100 84 A24 24 0 0 1 124 60 L1316 60 A24 24 0 0 1 1340 84 L1340 124 L100 124 Z' fill='#171d2b' />
+  <line x1='100' y1='124' x2='1340' y2='124' stroke='#ffffff' stroke-opacity='0.08' stroke-width='1' />
+
+  <!-- Mac style dots -->
+  <circle cx='140' cy='92' r='6.5' fill='#ef4444' opacity='0.8' />
+  <circle cx='162' cy='92' r='6.5' fill='#f59e0b' opacity='0.8' />
+  <circle cx='184' cy='92' r='6.5' fill='#10b981' opacity='0.8' />
+
+  <!-- URL Address Bar -->
+  <rect x='340' y='76' width='760' height='32' rx='8' fill='#090d15' stroke='#ffffff' stroke-opacity='0.08' stroke-width='1' />
+  <text x='720' y='97' font-family='JetBrains Mono, monospace' font-size='13' fill='#94a3b8' text-anchor='middle' font-weight='500'>
+    https://alipournut.com · Woodmart WooCommerce Storefront
+  </text>
+
+  <!-- Store E-Commerce Header Bar inside window -->
+  <rect x='100' y='125' width='1240' height='74' fill='#131926' opacity='0.95' />
+  <line x1='100' y1='199' x2='1340' y2='199' stroke='#ffffff' stroke-opacity='0.06' stroke-width='1' />
+
+  <!-- Brand Logo & Typography -->
+  <g transform='translate(150, 142)'>
+    <!-- Logo Icon: Stylized Pistachio / Leaf Nut in Golden Gradient -->
+    <rect x='0' y='0' width='40' height='40' rx='10' fill='url(#amberGrad)' />
+    <path d='M20 9 C27 15 28 25 20 31 C12 25 13 15 20 9 Z' fill='#0f141f' opacity='0.9' />
+    <path d='M20 12 C24 17 24 24 20 28 C18 24 18 17 20 12 Z' fill='#fbbf24' />
+    <text x='54' y='25' font-family='Plus Jakarta Sans, sans-serif' font-size='20' font-weight='800' fill='#ffffff' letter-spacing='0.5'>ALIPOUR NUT</text>
+    <text x='54' y='38' font-family='sans-serif' font-size='11' font-weight='600' fill='#f59e0b' letter-spacing='0.5'>آجیل و خشکبار علیپور · فروشگاه آنلاین</text>
+  </g>
+
+  <!-- Right Side Mock Nav Menu & Cart -->
+  <g transform='translate(880, 148)'>
+    <rect x='280' y='4' width='130' height='34' rx='8' fill='#f59e0b' fill-opacity='0.15' stroke='#f59e0b' stroke-width='1' />
+    <text x='345' y='26' font-family='sans-serif' font-size='12' font-weight='700' fill='#fbbf24' text-anchor='middle'>سبد خرید (۰)</text>
+    
+    <text x='240' y='26' font-family='sans-serif' font-size='13' font-weight='600' fill='#cbd5e1' text-anchor='end'>زعفران و زرشک</text>
+    <text x='130' y='26' font-family='sans-serif' font-size='13' font-weight='600' fill='#cbd5e1' text-anchor='end'>خشکبار اعلا</text>
+    <text x='30' y='26' font-family='sans-serif' font-size='13' font-weight='600' fill='#cbd5e1' text-anchor='end'>پسته و مغزها</text>
+  </g>
+
+  <!-- Store Hero Banner inside Window -->
+  <g transform='translate(150, 230)'>
+    <!-- Main Banner Canvas -->
+    <rect x='0' y='0' width='1140' height='310' rx='18' fill='#172033' stroke='#ffffff' stroke-opacity='0.1' stroke-width='1.5' />
+    <rect x='0' y='0' width='1140' height='310' rx='18' fill='url(#goldGlow)' />
+
+    <!-- Status Ribbon / Badge -->
+    <rect x='44' y='36' width='160' height='30' rx='6' fill='#f59e0b' fill-opacity='0.2' stroke='#f59e0b' stroke-width='1.2' />
+    <circle cx='60' cy='51' r='4' fill='#f59e0b' />
+    <text x='74' y='56' font-family='JetBrains Mono, monospace' font-size='11' font-weight='700' fill='#fbbf24' letter-spacing='1'>IN DEVELOPMENT</text>
+
+    <!-- Persian Title & Description -->
+    <text x='44' y='120' font-family='sans-serif' font-size='38' font-weight='900' fill='#ffffff' letter-spacing='-0.5'>
+      فروشگاه آنلاین آجیل و خشکبار اعلای علیپور
+    </text>
+    <text x='44' y='160' font-family='sans-serif' font-size='18' font-weight='500' fill='#cbd5e1'>
+      طراحی و پیاده‌سازی پلتفرم فروشگاهی مدرن با وردپرس و قالب وودمارت (Woodmart)
+    </text>
+    <text x='44' y='190' font-family='sans-serif' font-size='15' font-weight='400' fill='#94a3b8'>
+      پشتیبانی از چیدمان استاندارد فارسی RTL · فیلتر پیشرفته محصولات ووکامرس · تسویه‌حساب بهینه‌سازی‌شده
+    </text>
+
+    <!-- Tag Pills -->
+    <g transform='translate(44, 230)'>
+      <rect x='0' y='0' width='110' height='32' rx='8' fill='#0f141f' stroke='#ffffff' stroke-opacity='0.12' stroke-width='1' />
+      <text x='55' y='21' font-family='JetBrains Mono, monospace' font-size='12' font-weight='600' fill='#38bdf8' text-anchor='middle'>Woodmart</text>
+
+      <rect x='124' y='0' width='120' height='32' rx='8' fill='#0f141f' stroke='#ffffff' stroke-opacity='0.12' stroke-width='1' />
+      <text x='184' y='21' font-family='JetBrains Mono, monospace' font-size='12' font-weight='600' fill='#a78bfa' text-anchor='middle'>WooCommerce</text>
+
+      <rect x='258' y='0' width='130' height='32' rx='8' fill='#0f141f' stroke='#ffffff' stroke-opacity='0.12' stroke-width='1' />
+      <text x='323' y='21' font-family='JetBrains Mono, monospace' font-size='12' font-weight='600' fill='#4ade80' text-anchor='middle'>RTL Layout</text>
+
+      <rect x='402' y='0' width='175' height='32' rx='8' fill='#0f141f' stroke='#ffffff' stroke-opacity='0.12' stroke-width='1' />
+      <text x='489' y='21' font-family='sans-serif' font-size='12' font-weight='600' fill='#fbbf24' text-anchor='middle'>در حال توسعه و بارگذاری</text>
+    </g>
+
+    <!-- Decorative Illustration Box Right Side -->
+    <g transform='translate(830, 36)'>
+      <rect x='0' y='0' width='265' height='238' rx='14' fill='#0c111c' stroke='#f59e0b' stroke-opacity='0.25' stroke-width='1.5' />
+      
+      <!-- Nut Silhouette Elements in Golden Tones -->
+      <circle cx='132' cy='95' r='54' fill='#f59e0b' fill-opacity='0.1' stroke='#f59e0b' stroke-dasharray='4 4' stroke-width='1.5' />
+      
+      <!-- Golden Pistachio Emblem -->
+      <path d='M132 55 C162 75 165 115 132 135 C99 115 102 75 132 55 Z' fill='url(#amberGrad)' filter='url(#glow)' />
+      <path d='M132 65 C148 85 148 110 132 125 C124 110 124 85 132 65 Z' fill='#0f141f' />
+      <circle cx='132' cy='95' r='8' fill='#fde68a' />
+
+      <text x='132' y='170' font-family='Plus Jakarta Sans, sans-serif' font-size='14' font-weight='800' fill='#ffffff' text-anchor='middle'>PREMIUM NUTS</text>
+      <text x='132' y='190' font-family='sans-serif' font-size='12' font-weight='600' fill='#f59e0b' text-anchor='middle'>پسته اکبری · خندان دستچین</text>
+      <text x='132' y='212' font-family='JetBrains Mono, monospace' font-size='11' fill='#94a3b8' text-anchor='middle'>Alipour Quality Seal</text>
+    </g>
+  </g>
+
+  <!-- 3 Product Cards Showcase Mockup below banner -->
+  <g transform='translate(150, 565)'>
+    <!-- Card 1 -->
+    <g transform='translate(0, 0)'>
+      <rect x='0' y='0' width='360' height='235' rx='14' fill='#131926' stroke='#ffffff' stroke-opacity='0.08' stroke-width='1' />
+      <rect x='15' y='15' width='330' height='120' rx='10' fill='#0b0f19' />
+      <!-- Stylized item art -->
+      <circle cx='180' cy='75' r='38' fill='#f59e0b' fill-opacity='0.15' />
+      <path d='M180 50 C198 62 200 88 180 100 C160 88 162 62 180 50 Z' fill='#f59e0b' />
+      <text x='180' y='160' font-family='sans-serif' font-size='15' font-weight='700' fill='#ffffff' text-anchor='middle'>پسته اکبری اعلا (یک کیلوگرم)</text>
+      <text x='180' y='182' font-family='sans-serif' font-size='12' fill='#94a3b8' text-anchor='middle'>سورتینگ دستچین درجه یک رفسنجان</text>
+      <text x='180' y='212' font-family='JetBrains Mono, monospace' font-size='14' font-weight='700' fill='#fbbf24' text-anchor='middle'>Woodmart Product Card</text>
+    </g>
+
+    <!-- Card 2 -->
+    <g transform='translate(390, 0)'>
+      <rect x='0' y='0' width='360' height='235' rx='14' fill='#131926' stroke='#ffffff' stroke-opacity='0.08' stroke-width='1' />
+      <rect x='15' y='15' width='330' height='120' rx='10' fill='#0b0f19' />
+      <circle cx='180' cy='75' r='38' fill='#10b981' fill-opacity='0.15' />
+      <circle cx='180' cy='75' r='22' fill='#10b981' />
+      <text x='180' y='160' font-family='sans-serif' font-size='15' font-weight='700' fill='#ffffff' text-anchor='middle'>مغز گردوی تویسرکان تازه</text>
+      <text x='180' y='182' font-family='sans-serif' font-size='12' fill='#94a3b8' text-anchor='middle'>مغز سفید و دوپر روغنی ارگانیک</text>
+      <text x='180' y='212' font-family='JetBrains Mono, monospace' font-size='14' font-weight='700' fill='#34d399' text-anchor='middle'>WooCommerce Stock Engine</text>
+    </g>
+
+    <!-- Card 3 -->
+    <g transform='translate(780, 0)'>
+      <rect x='0' y='0' width='360' height='235' rx='14' fill='#131926' stroke='#ffffff' stroke-opacity='0.08' stroke-width='1' />
+      <rect x='15' y='15' width='330' height='120' rx='10' fill='#0b0f19' />
+      <circle cx='180' cy='75' r='38' fill='#ef4444' fill-opacity='0.15' />
+      <path d='M170 60 L190 60 L185 92 L175 92 Z' fill='#ef4444' />
+      <text x='180' y='160' font-family='sans-serif' font-size='15' font-weight='700' fill='#ffffff' text-anchor='middle'>زعفران نگین سوپر قائنات</text>
+      <text x='180' y='182' font-family='sans-serif' font-size='12' fill='#94a3b8' text-anchor='middle'>بسته‌بندی کادویی ۵ گرمی استاندارد</text>
+      <text x='180' y='212' font-family='JetBrains Mono, monospace' font-size='14' font-weight='700' fill='#f87171' text-anchor='middle'>Live Price Calculation</text>
+    </g>
+  </g>
+
+  <!-- Bottom Floating Development Notification Banner -->
+  <g transform='translate(420, 835)'>
+    <rect x='0' y='0' width='600' height='38' rx='10' fill='#171d2b' stroke='#f59e0b' stroke-opacity='0.4' stroke-width='1.2' filter='url(#dropShadow)' />
+    <circle cx='24' cy='19' r='5' fill='#f59e0b' />
+    <text x='42' y='24' font-family='sans-serif' font-size='12' font-weight='600' fill='#fde68a'>
+      تصویر موقت پیش‌نمایش · عکس‌های نهایی پروژه پس از تکمیل بارگذاری خواهند شد
+    </text>
+  </g>
+</svg>

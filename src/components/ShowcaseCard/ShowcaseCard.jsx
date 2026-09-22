@@ -11,6 +11,7 @@ import {
   Images,
 } from 'lucide-react';
 import { Button } from '../Button/Button.jsx';
+import { ProjectPlaceholder } from '../ProjectPlaceholder/ProjectPlaceholder.jsx';
 import { cn } from '../../utils/cn.js';
 import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
@@ -36,6 +37,7 @@ export const ShowcaseCard = ({
   const shouldReduceMotion = useReducedMotion();
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [initialImageIndex, setInitialImageIndex] = useState(0);
+  const [imageError, setImageError] = useState(false);
 
   const isWordPress = type === 'wordpress';
 
@@ -121,7 +123,7 @@ export const ShowcaseCard = ({
             onClick={() => handleOpenDetails(0)}
             className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#090d16] aspect-[16/10] group/img cursor-pointer shadow-lg transition-transform duration-300"
           >
-            {previewImage ? (
+            {previewImage && !imageError ? (
               <img
                 src={previewImage}
                 alt={project.title}
@@ -129,13 +131,17 @@ export const ShowcaseCard = ({
                 decoding="async"
                 width="640"
                 height="400"
+                onError={() => setImageError(true)}
                 className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
               />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-[#87929a] bg-[#0c111a]">
-                <Layers className="w-8 h-8 opacity-40" />
-                <span className="font-mono text-xs">Preview Pending</span>
-              </div>
+              <ProjectPlaceholder
+                title={project.title}
+                subtitle="پیش‌نمایش بصری به‌زودی بارگذاری می‌شود"
+                badge={project.hudBadge || (project.status?.includes('Progress') || project.status?.includes('Development') ? 'IN DEVELOPMENT' : 'PREVIEW PENDING')}
+                accent={project.accent || 'amber'}
+                compact={true}
+              />
             )}
 
             {/* Subtle Gradient Shadow Vignette */}
