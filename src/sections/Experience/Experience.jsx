@@ -30,7 +30,7 @@ export const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-10 sm:py-14 flex flex-col gap-4 sm:gap-5">
+    <section id="experience" className="py-10 sm:py-14 flex flex-col gap-4 sm:gap-5 scroll-mt-24 sm:scroll-mt-28">
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

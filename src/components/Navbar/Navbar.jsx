@@ -28,40 +28,64 @@ export const Navbar = () => {
     setMobileMenuOpen(false);
 
     if (item.isRoute) {
-      // Let standard Link or navigate to /projects handle it
+      if (location.pathname !== '/projects') {
+        navigate('/projects');
+      }
       return;
     }
 
     e.preventDefault();
-    if (item.path === '/') {
-      if (location.pathname !== '/') {
+
+    if (item.id === 'hero') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        if (window.location.hash) {
+          window.history.pushState(null, '', window.location.pathname);
+        }
+      } else {
         navigate('/');
       }
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       return;
     }
 
-    if (location.pathname !== '/') {
-      navigate(item.path);
-    } else {
-      const hash = item.path.split('#')[1];
-      const target = document.getElementById(hash);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+    if (item.id === 'experience') {
+      if (location.pathname === '/') {
+        const target = document.getElementById('experience');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          window.history.pushState(null, '', '#experience');
+        }
+      } else {
+        navigate('/#experience');
       }
+      return;
+    }
+
+    if (item.id === 'contact') {
+      if (location.pathname === '/') {
+        const target = document.getElementById('contact');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          window.history.pushState(null, '', '#contact');
+        }
+      } else {
+        navigate('/#contact');
+      }
+      return;
     }
   };
 
   const handleContactClick = (e) => {
+    e?.preventDefault();
     setMobileMenuOpen(false);
-    if (location.pathname !== '/') {
-      navigate('/#contact');
-    } else {
-      e.preventDefault();
+    if (location.pathname === '/') {
       const target = document.getElementById('contact');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', '#contact');
       }
+    } else {
+      navigate('/#contact');
     }
   };
 
@@ -78,9 +102,15 @@ export const Navbar = () => {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link
               to="/"
-              onClick={() => {
+              onClick={(e) => {
                 setMobileMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  if (window.location.hash) {
+                    window.history.pushState(null, '', window.location.pathname);
+                  }
+                }
               }}
               className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none"
             >

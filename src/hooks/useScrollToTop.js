@@ -6,26 +6,46 @@ export function useScrollToTop() {
 
   useEffect(() => {
     // Disable automatic browser scroll restoration on reload/route change
-    if ('scrollRestoration' in window.history) {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
 
-    // If there's an anchor hash (other than #hero or empty), scroll to it
     const cleanHash = hash ? hash.replace('#', '') : '';
+
+    // If there's an anchor hash (other than #hero or empty), scroll to that section
     if (cleanHash && cleanHash !== 'hero') {
-      const element = document.getElementById(cleanHash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
+      let attempts = 0;
+      let timerId = null;
+      let cancelled = false;
+
+      const scrollToTarget = () => {
+        if (cancelled) return;
+        const element = document.getElementById(cleanHash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else if (attempts < 25) {
+          // Retry for up to ~500ms while DOM mounts
+          attempts++;
+          timerId = setTimeout(scrollToTarget, 20);
+        }
+      };
+
+      // Run on next animation frame to allow DOM mount
+      const rafId = requestAnimationFrame(scrollToTarget);
+
+      return () => {
+        cancelled = true;
+        cancelAnimationFrame(rafId);
+        if (timerId) clearTimeout(timerId);
+      };
     }
 
-    // Always scroll strictly to the very top (0, 0)
+    // Always scroll strictly to the very top (0, 0) when no target hash is specified
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
 
-    // A fast next-tick backup ensuring dynamic content/animations don't displace the scroll position
+    // Fast next-frame backup ensuring dynamic content/animations don't displace scroll position
     const rafId = requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
@@ -35,3 +55,4 @@ export function useScrollToTop() {
     return () => cancelAnimationFrame(rafId);
   }, [pathname, hash]);
 }
+
