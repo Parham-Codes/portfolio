@@ -65,7 +65,7 @@ export const ShowcaseCard = ({
     ? project.images
     : [];
 
-  const previewImage = project.image || project.coverImage || (galleryImages.length > 0 ? galleryImages[0] : null);
+  const previewImage = project.cardImage || project.image || project.coverImage || (galleryImages.length > 0 ? galleryImages[0] : null);
   const totalScreenshots = galleryImages.length;
 
   // Safe external URLs

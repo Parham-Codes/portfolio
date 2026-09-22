@@ -82,6 +82,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'AlipourNut // Woodmart [In Development]',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/alipournut/cover.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/alipournut/cover.webp`,
     gallery: [],
     accent: 'amber',
     hudTitle: 'In Development',
@@ -167,6 +168,7 @@ export const wordpressProjects = [
     featured: true,
     windowFile: 'Mahour Gallery // WordPress',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/Home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/Home-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/Home.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/shop.webp`,
@@ -229,6 +231,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'SardarKesht // Woodmart & LearnDash',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/sardarkesht/home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/sardarkesht/home-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/sardarkesht/home.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/sardarkesht/shop.webp`,
@@ -292,6 +295,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'Shokoofeh Ship // WordPress & Booking',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/main.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/main-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/main.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/product.webp`,
@@ -356,6 +360,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'Choob Yaran // WordPress & WooCommerce',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/main.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/main-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/main.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/shop.webp`,
@@ -418,6 +423,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'Kanoon Raja // WordPress & Elementor Pro',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/home-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/home.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/shop.webp`,
@@ -480,6 +486,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'Mob Part // WordPress & WooCommerce',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/home-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/home.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/shop.webp`,
@@ -550,6 +557,7 @@ export const wordpressProjects = [
     featured: false,
     windowFile: 'Card-to-Card Payment Plugin // PHP & WordPress Plugin',
     image: `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-admin-panel.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-admin-panel-card.webp`,
     gallery: [
       `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-admin-panel.webp`,
       `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-modal-paymethod.webp`,

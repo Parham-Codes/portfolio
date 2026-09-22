@@ -3,12 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import { Background } from './components/Background/Background.jsx';
 import { Navbar } from './components/Navbar/Navbar.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
+import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.jsx';
+import { HomePage } from './pages/Home/HomePage.jsx';
 import { useScrollToTop } from './hooks/useScrollToTop.js';
 
-// Route-level code splitting: each page loads on demand
-const HomePage = lazy(() =>
-  import('./pages/Home/HomePage.jsx').then((module) => ({ default: module.HomePage }))
-);
+// Route-level code splitting for secondary pages
 const ProjectsPage = lazy(() =>
   import('./pages/Projects/ProjectsPage.jsx').then((module) => ({ default: module.ProjectsPage }))
 );
@@ -27,6 +26,9 @@ export const App = () => {
 
   return (
     <div className="min-h-screen bg-[#070a12] text-[#dfe2ee] font-sans antialiased selection:bg-[#38bdf8]/30 selection:text-white flex flex-col relative overflow-x-hidden">
+      {/* Full-Page Initial Loading Experience */}
+      <LoadingScreen />
+
       {/* Modern Developer Background with Ambient Glows & Architectural Grid */}
       <Background />
 

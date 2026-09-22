@@ -78,9 +78,12 @@ export const ProjectsCTA = () => {
               {/* Image on top */}
               <div className="w-full h-44 sm:h-48 overflow-hidden bg-[#121620] relative">
                 <img
-                  src={project.image}
+                  src={project.cardImage || project.image}
                   alt={project.title}
                   loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="225"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#181c24] via-transparent to-transparent opacity-80" />

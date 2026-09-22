@@ -37,18 +37,6 @@ export const Hero = () => {
     },
   };
 
-  const heroHeadingVariants = {
-    hidden: { opacity: 0, y: 22 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.65,
-        ease: smoothEase,
-      },
-    },
-  };
-
   const stackContainerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -97,35 +85,26 @@ export const Hero = () => {
         </span>
       </motion.div>
 
-      {/* Main Headline & Supporting Paragraph (Clean Single-Column) */}
+      {/* Main Headline & Supporting Paragraph (Clean Single-Column) - Immediate LCP Paint */}
       <div className="flex flex-col gap-3.5 sm:gap-4 max-w-3xl">
         {/* 2. Eyebrow */}
-        <motion.p
-          variants={heroItemVariants}
-          className="font-mono text-xs sm:text-sm text-[#38bdf8] uppercase tracking-wider sm:tracking-widest flex items-center gap-2"
-        >
+        <p className="font-mono text-xs sm:text-sm text-[#38bdf8] uppercase tracking-wider sm:tracking-widest flex items-center gap-2">
           <Terminal className="w-4 h-4 shrink-0" />
           <span>FRONT-END &amp; WORDPRESS DEVELOPER</span>
-        </motion.p>
+        </p>
 
-        {/* 3. Main Heading (slightly longer duration) */}
-        <motion.h1
-          variants={heroHeadingVariants}
-          className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#dfe2ee] tracking-tight leading-[1.15] sm:leading-[1.1]"
-        >
+        {/* 3. Main Heading (Primary LCP Element - Zero Render Delay & Zero CLS) */}
+        <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#dfe2ee] tracking-tight leading-[1.15] sm:leading-[1.1]">
           Hi, I'm Parham.{' '}
           <span className="bg-gradient-to-r from-[#38bdf8] via-[#8ed5ff] to-[#c0c1ff] text-transparent bg-clip-text">
             I build modern, responsive web experiences.
           </span>
-        </motion.h1>
+        </h1>
 
         {/* 4. Supporting Paragraph */}
-        <motion.p
-          variants={heroItemVariants}
-          className="font-sans text-[#bdc8d1] text-sm sm:text-lg max-w-2xl pt-1 leading-relaxed"
-        >
+        <p className="font-sans text-[#bdc8d1] text-sm sm:text-lg max-w-2xl pt-1 leading-relaxed">
           React-focused Front-End Developer with hands-on experience building modern web interfaces, WordPress/WooCommerce websites, and REST-powered applications with Node.js and Express.
-        </motion.p>
+        </p>
       </div>
 
       {/* 5 & 6. Action Buttons & Social Links */}
