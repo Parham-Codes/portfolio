@@ -1,0 +1,561 @@
+/**
+ * WordPress Projects Dataset
+ *
+ * Dedicated collection for WordPress websites, client solutions, and customized web builds.
+ * Kept completely separate from the coding projects dataset (src/data/projects.js).
+ *
+ * Schema follows the repository's project data conventions:
+ * - id: unique string identifier
+ * - name: project display name
+ * - title: full title of the project
+ * - category: concise domain categorization (e.g. 'WordPress / E-Commerce / Education')
+ * - status: completion / development status
+ * - shortLabel: concise secondary label
+ * - shortTitle: short name used for compact UI cards
+ * - description: concise overview of the project and its context
+ * - fullDescription: detailed description of requirements, user experience, and deliverables
+ * - accuracyNote: factual scope and context notes without marketing hype (or null)
+ * - features: specific deliverables, frontend customizations, and functionality built
+ * - keyWins: notable project deliverables and technical solutions
+ * - technicalFocus: core implementation areas and WordPress/WooCommerce competencies
+ * - technologies: specific CMS tools, themes, plugins, and styling approaches used
+ * - tags: searchable keywords matching technologies and project aspects
+ * - githubUrl: optional public GitHub URL (null if not applicable)
+ * - apiRepoUrl: optional companion API repository (null if not applicable)
+ * - liveUrl: confirmed live website URL (or null if unavailable)
+ * - featured: boolean flag
+ * - windowFile: display label for the mock window header
+ * - image: primary project cover image / screenshot
+ * - gallery: array of screenshot paths for gallery presentation (empty array if pending)
+ * - accent: color theme accent for UI highlights ('emerald', 'cyan', 'blue', 'amber', etc.)
+ * - hudTitle: concise technical domain badge
+ * - hudSub: secondary tools summary
+ * - hudBadge: compact upper badge label
+ */
+
+export const wordpressProjects = [
+  {
+    id: 'mahour-gallery',
+    name: 'Mahour Gallery',
+    title: 'Mahour Gallery',
+    category: 'WordPress / E-Commerce / Education',
+    status: 'Completed / Client Project',
+    shortLabel: 'WordPress Website & Custom Development',
+    shortTitle: 'Mahour Gallery',
+    description:
+      'A WordPress website combining an online business/store presence for products and accessories with an educational section for courses, customized using Elementor, WooCommerce, and LearnDash.',
+    fullDescription:
+      'Mahour Gallery is a WordPress website combining an online business/store presence with an educational section.\n\nThe website works with products and accessories and also provides educational courses. Customization and development work included Elementor-based page design, WooCommerce setup, LearnDash course section implementation, and user registration and authentication using Digits.\n\nCustom frontend features were developed including dynamic mobile navigation, a custom user dropdown, bottom navigation with glass-style UI, course-related customizations with a card-to-card payment workflow and transaction status handling, and custom shortcodes including a bento-style latest articles layout.',
+    accuracyNote:
+      'Approximate site response measured under 0.8 seconds with cache and around 2.5 seconds without cache under typical test conditions.',
+    features: [
+      'WordPress website design and customization',
+      'Elementor-based page design and customization',
+      'WooCommerce-related website and product functionality',
+      'LearnDash course section implementation',
+      'User registration and authentication work using Digits',
+      'Custom mobile navigation',
+      'Custom user dropdown',
+      'Custom bottom navigation with glass-style UI',
+      'Course-related customization',
+      'Card-to-card payment workflow for courses and transaction/payment status handling',
+      'Custom shortcode for dynamic mobile menu: [mahour_dynamic_mobile_menu]',
+      'Custom shortcode for user dropdown: [mahour_user_dropdown]',
+      'Custom shortcode for latest articles: [mahour_latest_articles]',
+      'Bento-style latest articles layout',
+      'Custom CSS and frontend customization',
+    ],
+    keyWins: [
+      'Dual-purpose platform supporting both product sales and educational courses',
+      'Custom mobile navigation, user dropdown, and glass-style bottom navigation',
+      'Custom shortcodes for dynamic mobile menu, user dropdown, and bento article layout',
+      'Card-to-card payment workflow and transaction status handling for courses',
+    ],
+    technicalFocus: [
+      'WordPress & Astra theme foundation',
+      'Elementor & UAEL page design and customization',
+      'WooCommerce store and product functionality',
+      'LearnDash course structure & content',
+      'Digits user registration and authentication',
+      'Custom shortcodes & Code Snippets',
+      'ACF & CPT integration',
+      'Custom CSS & frontend customization',
+    ],
+    technologies: [
+      'WordPress',
+      'Astra',
+      'Elementor',
+      'WooCommerce',
+      'LearnDash',
+      'Gravity Forms',
+      'Digits',
+      'UAEL',
+      'ACF',
+      'CPT',
+      'Code Snippets',
+      'Custom CSS',
+    ],
+    tags: [
+      'WordPress',
+      'Astra',
+      'Elementor',
+      'WooCommerce',
+      'LearnDash',
+      'Gravity Forms',
+      'Digits',
+      'ACF',
+      'CPT',
+      'Custom CSS',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: 'https://mahourgallery.ir',
+    featured: true,
+    windowFile: 'Mahour Gallery // WordPress',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/Home.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/Home.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/shop.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/courses.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/single-course.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/single-course2.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/blog.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mahour-gallery/about-us.webp`,
+    ],
+    accent: 'emerald',
+    hudTitle: 'WordPress Development',
+    hudSub: 'Elementor · WooCommerce · LearnDash',
+    hudBadge: 'WORDPRESS',
+  },
+  {
+    id: 'sardarkesht',
+    name: 'SardarKesht',
+    title: 'SardarKesht',
+    category: 'WordPress / Agriculture',
+    status: 'Completed / Client Project',
+    shortLabel: 'Nursery & Agriculture Website',
+    shortTitle: 'SardarKesht',
+    description:
+      'A WordPress website in the nursery and agriculture space, featuring Woodmart-based UI customization, LearnDash-related customization, and frontend layout work.',
+    fullDescription:
+      'SardarKesht is a WordPress website developed for the nursery and agriculture space.\n\nThe project focused on WordPress website design and customization, Woodmart-based UI customization, LearnDash-related customization, page and frontend customization, and website content/layout work for agricultural presentation.',
+    accuracyNote: null,
+    features: [
+      'WordPress website design and customization',
+      'Woodmart-based UI customization',
+      'LearnDash-related customization',
+      'Page and frontend customization',
+      'Website content and layout work',
+    ],
+    keyWins: [
+      'Structured presentation for nursery and agricultural content',
+      'Woodmart UI and LearnDash customizations tailored to project requirements',
+    ],
+    technicalFocus: [
+      'WordPress website design & customization',
+      'Woodmart theme UI customization',
+      'LearnDash-related customization',
+      'Page layout & content styling',
+    ],
+    technologies: [
+      'WordPress',
+      'Woodmart',
+      'LearnDash',
+    ],
+    tags: [
+      'WordPress',
+      'Woodmart',
+      'LearnDash',
+      'Agriculture',
+      'Nursery',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: null,
+    featured: false,
+    windowFile: 'SardarKesht // Woodmart & LearnDash',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/sardarkesht/cover.webp`,
+    gallery: [],
+    accent: 'emerald',
+    hudTitle: 'Agriculture Website',
+    hudSub: 'Woodmart · LearnDash',
+    hudBadge: 'WORDPRESS',
+  },
+  {
+    id: 'alipournut',
+    name: 'AlipourNut',
+    title: 'AlipourNut',
+    category: 'WordPress / E-Commerce',
+    status: 'In Development',
+    shortLabel: 'Dried Fruits & Nuts Online Store',
+    shortTitle: 'AlipourNut',
+    description:
+      'An active WordPress and Woodmart e-commerce website currently under development for dried fruits and nuts, with focus on category grid layout and RTL presentation.',
+    fullDescription:
+      'AlipourNut is a WordPress e-commerce website currently in development for dried fruits and nuts.\n\nWork centers on store layout design, Woodmart theme configuration, and RTL category grid adjustments around selector .wd-cats-element .wd-grid-g within an 1140px container (4 columns, 267px item width, 24px gap) to ensure balanced alignment and responsive spacing.',
+    accuracyNote:
+      'Active project in development. Layout work involves Woodmart category grid styling (.wd-cats-element .wd-grid-g) within an 1140px container (4 columns, 267px item width, 24px gap) under RTL conditions.',
+    features: [
+      'WordPress website design and Woodmart theme setup in development',
+      'Woodmart category grid layout adjustment (.wd-cats-element .wd-grid-g)',
+      'RTL presentation and spacing within an 1140px container (4 columns, 267px width, 24px gap)',
+      'Online store structure and category organization',
+      'Responsive design testing across screen widths',
+    ],
+    keyWins: [
+      'Store layout and category architecture for dried fruits and nuts',
+      'Fine-tuned Woodmart RTL category grid spacing and item distribution',
+    ],
+    technicalFocus: [
+      'WordPress & Woodmart development',
+      'Woodmart theme configuration',
+      'RTL styling & category grid customization (.wd-grid-g)',
+      'Responsive design & spacing',
+    ],
+    technologies: [
+      'WordPress',
+      'Woodmart',
+    ],
+    tags: [
+      'WordPress',
+      'Woodmart',
+      'E-Commerce',
+      'In Development',
+      'RTL',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: 'https://alipournut.com',
+    featured: false,
+    windowFile: 'AlipourNut // Woodmart [In Development]',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/alipournut/cover.webp`,
+    gallery: [],
+    accent: 'amber',
+    hudTitle: 'In Development',
+    hudSub: 'Woodmart · RTL Grid',
+    hudBadge: 'IN DEV',
+  },
+  {
+    id: 'choob-yaran',
+    name: 'Choob Yaran',
+    title: 'Choob Yaran',
+    category: 'WordPress / E-Commerce',
+    status: 'Completed / Personal Project',
+    shortLabel: 'Wooden Products Online Store',
+    shortTitle: 'Choob Yaran',
+    description:
+      'A modern responsive e-commerce website created as a personal/family project for my father to showcase and sell wood and wooden products online.',
+    fullDescription:
+      'Choob Yaran is a personal and family project created for my father to establish an online store for wood products and wooden items.\n\nThe project was designed as a modern responsive e-commerce website featuring a homepage with slider and product presentation, a product store with filters and categories, dedicated product pages with image galleries, a shopping cart, order process, user account area, and order management.',
+    accuracyNote:
+      'Personal/family project created for my father to showcase and sell wooden products.',
+    features: [
+      'Homepage with slider and product presentation',
+      'Product store with filters and categories',
+      'Dedicated product pages and product image galleries',
+      'Shopping cart and order process workflows',
+      'User account area and order management',
+      'Responsive design for mobile, tablet, and desktop',
+    ],
+    keyWins: [
+      'Complete e-commerce experience created for a family wooden products business',
+      'Product catalog with filtering, categories, dedicated galleries, and cart/checkout',
+      'Responsive design across mobile, tablet, and desktop devices',
+    ],
+    technicalFocus: [
+      'WordPress CMS implementation',
+      'Elementor Pro page design & theme building',
+      'WooCommerce product store & cart/checkout workflows',
+      'User account & order management',
+      'Responsive e-commerce layouts',
+    ],
+    technologies: [
+      'WordPress',
+      'Elementor Pro',
+      'WooCommerce',
+    ],
+    tags: [
+      'WordPress',
+      'Elementor Pro',
+      'WooCommerce',
+      'E-Commerce',
+      'Personal Project',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: null,
+    featured: false,
+    windowFile: 'Choob Yaran // WordPress & WooCommerce',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/main.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/main.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/shop.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/product.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/choob-yaran/mobile.webp`,
+    ],
+    accent: 'emerald',
+    hudTitle: 'Personal Project',
+    hudSub: 'Elementor Pro · WooCommerce',
+    hudBadge: 'PERSONAL',
+  },
+  {
+    id: 'kanoon-raja',
+    name: 'Kanoon Raja',
+    title: 'Kanoon Raja',
+    category: 'WordPress / Education',
+    status: 'Completed / Client Project',
+    shortLabel: 'Psychology Course Sales Website',
+    shortTitle: 'Kanoon Raja',
+    description:
+      'An educational website developed for presenting and selling psychology courses, with dedicated course pages, search and category filtering, and student user accounts.',
+    fullDescription:
+      'Kanoon Raja is an educational client project built on WordPress for selling psychology courses.\n\nThe website features a homepage introducing available courses, a dedicated slider, a course store with category and search functionality, dedicated course pages with comprehensive course descriptions, a student user panel, order management, admin management for courses, users, and content, and a fully responsive layout.',
+    accuracyNote: null,
+    features: [
+      'Homepage introducing courses with a dedicated slider',
+      'Course store with category and search functionality',
+      'Dedicated course pages with comprehensive course descriptions',
+      'Student user panel and order management',
+      'Admin management for courses, users, and content',
+      'Fully responsive design across devices',
+    ],
+    keyWins: [
+      'Dedicated course store layout with search, category filtering, and student portal',
+      'Structured educational course presentation powered by WooCommerce and Elementor Pro',
+    ],
+    technicalFocus: [
+      'WordPress website configuration',
+      'Elementor Pro design & course presentation',
+      'WooCommerce course sales & ordering',
+      'Student user panel & order management',
+      'Responsive design across devices',
+    ],
+    technologies: [
+      'WordPress',
+      'Elementor Pro',
+      'WooCommerce',
+    ],
+    tags: [
+      'WordPress',
+      'Elementor Pro',
+      'WooCommerce',
+      'Education',
+      'Courses',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: null,
+    featured: false,
+    windowFile: 'Kanoon Raja // WordPress & Elementor Pro',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/home.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/home.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/shop.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/product.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/kanoon-raja/mobile.webp`,
+    ],
+    accent: 'blue',
+    hudTitle: 'Education Website',
+    hudSub: 'Elementor Pro · WooCommerce',
+    hudBadge: 'EDUCATION',
+  },
+  {
+    id: 'mob-part',
+    name: 'Mob Part',
+    title: 'Mob Part',
+    category: 'WordPress / E-Commerce',
+    status: 'Completed / Client Project',
+    shortLabel: 'Mobile Phone Parts & Accessories Store',
+    shortTitle: 'Mob Part',
+    description:
+      'A modern responsive online store for mobile phone parts, accessories, and equipment, built with WordPress, Elementor Pro, and WooCommerce.',
+    fullDescription:
+      'Mob Part is a client project designed as a modern responsive online store for mobile phone parts, accessories, and equipment.\n\nThe website features a homepage with slider, product categories, a product store with filtering and search, dedicated product pages with image galleries, shopping cart and order process workflows, admin management of products, orders, and customers, and responsive design for mobile, tablet, and desktop.',
+    accuracyNote: null,
+    features: [
+      'Homepage with slider and product categories',
+      'Product store with filtering and search capabilities',
+      'Dedicated product pages with product image galleries',
+      'Shopping cart and order process workflow',
+      'Admin management of products, orders, and customers',
+      'Responsive mobile, tablet, and desktop design',
+    ],
+    keyWins: [
+      'Comprehensive catalog layout for mobile phone parts and technical accessories',
+      'Integrated search, category filtering, product galleries, and cart/order system',
+    ],
+    technicalFocus: [
+      'WordPress website architecture',
+      'Elementor Pro page and catalog design',
+      'WooCommerce e-commerce store & order management',
+      'Product galleries & filtering',
+      'Responsive mobile-first layout',
+    ],
+    technologies: [
+      'WordPress',
+      'Elementor Pro',
+      'WooCommerce',
+    ],
+    tags: [
+      'WordPress',
+      'Elementor Pro',
+      'WooCommerce',
+      'E-Commerce',
+      'Mobile Parts',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: null,
+    featured: false,
+    windowFile: 'Mob Part // WordPress & WooCommerce',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/home.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/home.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/shop.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/product.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/mob-part/mobile.webp`,
+    ],
+    accent: 'cyan',
+    hudTitle: 'E-Commerce Store',
+    hudSub: 'Elementor Pro · WooCommerce',
+    hudBadge: 'WORDPRESS',
+  },
+  {
+    id: 'shokoofeh-ship',
+    name: 'Shokoofeh Ship',
+    title: 'Shokoofeh Ship',
+    category: 'WordPress / Booking',
+    status: 'Completed / Client Project',
+    shortLabel: 'Recreational Ship Ticket Booking Website',
+    shortTitle: 'Shokoofeh Ship',
+    description:
+      'A modern responsive website for a recreational ship service with online ticket booking, program schedules, reservation management, and inquiry forms.',
+    fullDescription:
+      'Shokoofeh Ship is a client project developed as a modern responsive website for a recreational ship service with online ticket booking.\n\nThe website features a homepage presenting recreational services and schedules, online recreational ship ticket booking, dedicated pages for programs and events, reservation and user management, customer communication and contact forms, reservation request forms, and responsive design for mobile, tablet, and desktop.',
+    accuracyNote: null,
+    features: [
+      'Homepage presenting recreational services and schedules',
+      'Online recreational ship ticket booking',
+      'Dedicated pages for programs and events',
+      'Management of reservations and users',
+      'Customer communication and contact forms',
+      'Reservation request forms',
+      'Responsive design for mobile, tablet, and desktop',
+    ],
+    keyWins: [
+      'Online ticket booking and reservation request system for recreational voyages',
+      'Event schedule presentation and customer inquiry workflows',
+    ],
+    technicalFocus: [
+      'WordPress CMS deployment',
+      'Elementor page & event presentation',
+      'WooCommerce booking & ticketing integration',
+      'Reservation forms & customer communication',
+      'Responsive design across all devices',
+    ],
+    technologies: [
+      'WordPress',
+      'Elementor',
+      'WooCommerce',
+    ],
+    tags: [
+      'WordPress',
+      'Elementor',
+      'WooCommerce',
+      'Booking',
+      'Recreation',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: 'https://shokoofehship.com',
+    featured: false,
+    windowFile: 'Shokoofeh Ship // WordPress & Booking',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/main.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/main.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/product.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/panel2.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/shokoofeh-ship/mobile.webp`,
+    ],
+    accent: 'cyan',
+    hudTitle: 'Ticket Booking',
+    hudSub: 'Elementor · WooCommerce',
+    hudBadge: 'BOOKING',
+  },
+  {
+    id: 'card-to-card-payment-plugin',
+    name: 'Card-to-Card Payment Plugin',
+    title: 'Card-to-Card Payment Plugin',
+    category: 'WordPress / Plugin Development / Payments',
+    status: 'Completed / Custom Plugin',
+    shortLabel: 'Custom WordPress Payment Plugin',
+    shortTitle: 'Card-to-Card Payment Plugin',
+    description:
+      'A custom WordPress payment plugin implementing a manual card-to-card payment workflow with administrative transaction verification, approval and rejection handling, WooCommerce order integration, and LearnDash compatibility.',
+    fullDescription:
+      'Card-to-Card Payment Plugin is a custom WordPress plugin developed to handle manual card-to-card payment workflows for WordPress websites.\n\nRather than functioning as an automatic bank gateway or processor, the plugin facilitates an end-to-end manual payment flow: customers select card-to-card payment at checkout, execute the required manual transfer, and submit their transaction details. Administrators can then review submitted transactions directly from the WordPress administration panel, approving or rejecting them based on verification results.\n\nThe plugin integrates alongside WooCommerce to link payment records with the corresponding WooCommerce order context, updates transaction and order statuses accordingly, and supports dedicated rejection handling while recording processing administrator metadata. Additionally, the payment workflow is fully compatible with LearnDash course purchase workflows.',
+    accuracyNote:
+      'Custom plugin implementing a manual card-to-card verification workflow alongside WooCommerce and LearnDash; does not process automated bank transactions.',
+    features: [
+      'Manual card-to-card payment submission workflow',
+      'Administrator-side transaction verification and approval/rejection handling',
+      'Association of payment records with relevant WooCommerce orders',
+      'Compatibility with LearnDash course purchasing workflows',
+      'Transaction status management (Pending, Approved, Rejected)',
+      'Admin processing audit trail recording the reviewing administrator',
+      'Context-aware payment rejection workflow',
+    ],
+    keyWins: [
+      'End-to-end manual payment verification flow bridging customer transfer submissions and admin reviews',
+      'Seamless integration alongside WooCommerce order management and LearnDash course enrollment',
+      'Structured transaction status tracking with clear approval and rejection processing',
+    ],
+    technicalFocus: [
+      'Custom WordPress Plugin Development',
+      'WooCommerce Integration',
+      'LearnDash Compatibility',
+      'Manual Payment Verification',
+      'Transaction Status Management',
+      'Admin-Side Payment Processing',
+      'Custom WordPress Logic',
+    ],
+    technologies: [
+      'WordPress',
+      'PHP',
+      'WooCommerce',
+      'LearnDash',
+      'Custom Plugin Development',
+    ],
+    tags: [
+      'WordPress',
+      'PHP',
+      'WooCommerce',
+      'LearnDash',
+      'Plugin Development',
+      'Payments',
+    ],
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: null,
+    featured: false,
+    windowFile: 'Card-to-Card Payment Plugin // PHP & WordPress Plugin',
+    image: `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-admin-panel.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-admin-panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/woocomerce-modal-paymethod.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/learndash-admin-panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/learndash-and-woocomerce-page-paymentmethod.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/pending.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/user-panel.webp`,
+      `${import.meta.env.BASE_URL}images/projects/wordpress/card-to-card-payment-plugin/user-panel2.webp`,
+    ],
+    accent: 'indigo',
+    hudTitle: 'Manual Payment Workflow',
+    hudSub: 'WooCommerce · LearnDash · Custom Plugin',
+    hudBadge: 'WP PLUGIN',
+  },
+];

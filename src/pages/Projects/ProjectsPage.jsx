@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Layers,
   Sparkles,
+  Globe,
 } from 'lucide-react';
 import { ProjectCard } from '../../components/ProjectCard/ProjectCard.jsx';
 import { projects } from '../../data/projects.js';
@@ -58,15 +59,26 @@ export const ProjectsPage = () => {
         transition={{ duration: 0.5, ease: smoothEase }}
         className="flex flex-col gap-4 max-w-3xl"
       >
-        <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/30 font-mono text-xs text-[#38bdf8] font-bold flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5" />
-            Projects Showcase
-          </span>
-          <span className="font-mono text-xs text-[#56e5a9] flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#56e5a9] animate-pulse" />
-            {projects.length} Practical Projects
-          </span>
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/30 font-mono text-xs text-[#38bdf8] font-bold flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5" />
+              Projects Showcase
+            </span>
+            <span className="font-mono text-xs text-[#56e5a9] flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#56e5a9] animate-pulse" />
+              {projects.length} Practical Projects
+            </span>
+          </div>
+
+          <Link
+            to="/wordpress"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 text-emerald-300 font-sans text-xs font-semibold transition-colors group"
+          >
+            <Globe className="w-3.5 h-3.5 text-emerald-400" />
+            <span>View WordPress Projects</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
         <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#dfe2ee] tracking-tight leading-tight">

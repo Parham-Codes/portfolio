@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
-import { Terminal, Github, Menu, X, ArrowUpRight, Layers } from 'lucide-react';
+import { Terminal, Github, Menu, X, ArrowUpRight, Layers, Globe } from 'lucide-react';
 import { useActiveSection } from '../../hooks/useActiveSection.js';
 import { cn } from '../../utils/cn.js';
 import { smoothEase } from '../../utils/animations.jsx';
@@ -9,6 +9,7 @@ import { smoothEase } from '../../utils/animations.jsx';
 const navItems = [
   { id: 'hero', label: 'Overview', path: '/' },
   { id: 'projects', label: 'Projects', path: '/projects', isRoute: true },
+  { id: 'wordpress', label: 'WordPress', path: '/wordpress', isRoute: true },
   { id: 'experience', label: 'Experience', path: '/#experience' },
   { id: 'contact', label: 'Contact', path: '/#contact' },
 ];
@@ -23,13 +24,21 @@ export const Navbar = () => {
   const shouldReduceMotion = useReducedMotion();
 
   const isProjectsPage = location.pathname === '/projects';
+  const isWordPressPage = location.pathname === '/wordpress';
+  const isDedicatedPage = isProjectsPage || isWordPressPage;
+
+  const getItemIsActive = (item) => {
+    if (item.id === 'projects') return isProjectsPage;
+    if (item.id === 'wordpress') return isWordPressPage;
+    return !isDedicatedPage && activeSection === item.id;
+  };
 
   const handleNavClick = (e, item) => {
     setMobileMenuOpen(false);
 
     if (item.isRoute) {
-      if (location.pathname !== '/projects') {
-        navigate('/projects');
+      if (location.pathname !== item.path) {
+        navigate(item.path);
       }
       return;
     }
@@ -137,15 +146,13 @@ export const Navbar = () => {
           {/* Desktop Nav Items */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#121620]/60 p-1 rounded-full border border-white/[0.05]">
             {navItems.map((item) => {
-              const isActive = item.isRoute
-                ? isProjectsPage
-                : !isProjectsPage && activeSection === item.id;
+              const isActive = getItemIsActive(item);
 
               if (item.isRoute) {
                 return (
                   <Link
                     key={item.id}
-                    to="/projects"
+                    to={item.path}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
                       'font-sans text-xs sm:text-sm font-semibold rounded-full px-3.5 py-1.5 transition-all duration-200 flex items-center gap-1.5',
@@ -155,7 +162,6 @@ export const Navbar = () => {
                     )}
                   >
                     <span>{item.label}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] hidden group-hover:inline-block" />
                   </Link>
                 );
               }
@@ -238,15 +244,13 @@ export const Navbar = () => {
 
           <div className="flex flex-col gap-1">
             {navItems.map((item) => {
-              const isActive = item.isRoute
-                ? isProjectsPage
-                : !isProjectsPage && activeSection === item.id;
+              const isActive = getItemIsActive(item);
 
               if (item.isRoute) {
                 return (
                   <Link
                     key={item.id}
-                    to="/projects"
+                    to={item.path}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
                       'font-sans text-sm font-semibold rounded-xl px-3.5 py-3 flex items-center justify-between transition-all min-h-[44px]',
@@ -256,8 +260,18 @@ export const Navbar = () => {
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      <Layers className="w-4 h-4" />
-                      <span>{item.label} (Dedicated Hub)</span>
+                      {item.id === 'wordpress' ? (
+                        <Globe className="w-4 h-4" />
+                      ) : (
+                        <Layers className="w-4 h-4" />
+                      )}
+                      <span>
+                        {item.id === 'projects'
+                          ? 'Coding Projects (Hub)'
+                          : item.id === 'wordpress'
+                          ? 'WordPress Projects'
+                          : item.label}
+                      </span>
                     </div>
                     <ArrowUpRight className={cn('w-4 h-4', isActive ? 'text-[#00354a]' : 'opacity-70')} />
                   </Link>

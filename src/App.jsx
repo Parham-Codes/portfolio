@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar/Navbar.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
 import { HomePage } from './pages/Home/HomePage.jsx';
 import { ProjectsPage } from './pages/Projects/ProjectsPage.jsx';
+import { WordPressPage } from './pages/WordPress/WordPressPage.jsx';
 import { useScrollToTop } from './hooks/useScrollToTop.js';
 
 export const App = () => {
@@ -23,6 +24,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/wordpress" element={<WordPressPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
