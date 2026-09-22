@@ -74,7 +74,7 @@ export const Hero = () => {
       {/* 1. Availability / Status Pill */}
       <motion.div
         variants={heroItemVariants}
-        className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/35 shadow-sm shadow-emerald-950/50 backdrop-blur-md"
+        className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/35 shadow-sm shadow-emerald-950/50 backdrop-blur-sm sm:backdrop-blur-md"
       >
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -159,7 +159,7 @@ export const Hero = () => {
       {/* 7. My Stack Full-Width Card */}
       <motion.div
         variants={stackContainerVariants}
-        className="w-full p-4 sm:p-5 rounded-2xl bg-[#181c24]/80 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl transform-gpu flex flex-col gap-3 sm:gap-3.5"
+        className="w-full p-4 sm:p-5 rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/80 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-xl transform-gpu flex flex-col gap-3 sm:gap-3.5"
       >
         <h3 className="font-display text-base sm:text-lg font-bold text-[#dfe2ee] tracking-tight">
           My Stack

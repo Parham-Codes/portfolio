@@ -157,3 +157,18 @@
     animation: none !important;
   }
 }
+
+/* Mobile Performance Optimization:
+   Disable continuous multi-pass background transforms on mobile viewports.
+   Ensures the GPU doesn't recomposite blurred orbs on every scroll tick,
+   yielding locked 60/120fps scrolling on touch devices. */
+@media (max-width: 768px) {
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-ambient-slow,
+  .animate-ambient-reverse,
+  .animate-ambient-pulse {
+    animation: none !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+}

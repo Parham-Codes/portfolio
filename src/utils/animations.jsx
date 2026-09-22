@@ -6,8 +6,31 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
-// Common viewport settings for scroll-triggered entrance animations
-export const defaultViewport = { once: true, amount: 0.15 };
+// Common viewport settings for scroll-triggered entrance animations.
+// Uses margin: '100px 0px 0px 0px' and amount: 0 so triggers fire early BEFORE
+// elements cross the viewport threshold, completely eliminating Late Pop-in.
+export const defaultViewport = { once: true, amount: 0, margin: '100px 0px 0px 0px' };
+
+// Lightweight hook to detect mobile viewport without external dependencies
+export const useIsMobile = () => {
+  const [isMobile, setIsMobile] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mql = window.matchMedia('(max-width: 768px)');
+    const onChange = (e) => setIsMobile(e.matches);
+    setIsMobile(mql.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  return isMobile;
+};
 
 // Easing curves
 export const smoothEase = [0.16, 1, 0.3, 1];
@@ -77,11 +100,11 @@ export const FadeUp = ({
   className = '',
   delay = 0,
   duration = 0.5,
-  amount = 0.15,
   as = 'div',
   ...props
 }) => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const Component = motion[as] || motion.div;
 
   if (shouldReduceMotion) {
@@ -90,10 +113,10 @@ export const FadeUp = ({
 
   return (
     <Component
-      initial={{ opacity: 0, y: 20 }}
+      initial={isMobile ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount }}
-      transition={{ duration, delay, ease: smoothEase }}
+      viewport={defaultViewport}
+      transition={{ duration, delay: isMobile ? 0 : delay, ease: smoothEase }}
       className={className}
       {...props}
     >
@@ -110,11 +133,11 @@ export const FadeIn = ({
   className = '',
   delay = 0,
   duration = 0.45,
-  amount = 0.15,
   as = 'div',
   ...props
 }) => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const Component = motion[as] || motion.div;
 
   if (shouldReduceMotion) {
@@ -123,10 +146,10 @@ export const FadeIn = ({
 
   return (
     <Component
-      initial={{ opacity: 0 }}
+      initial={isMobile ? false : { opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount }}
-      transition={{ duration, delay, ease: smoothEase }}
+      viewport={defaultViewport}
+      transition={{ duration, delay: isMobile ? 0 : delay, ease: smoothEase }}
       className={className}
       {...props}
     >

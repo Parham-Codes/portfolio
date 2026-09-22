@@ -2,10 +2,11 @@ import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle.jsx';
 import { experience } from '../../data/experience.js';
-import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+import { smoothEase, defaultViewport, useIsMobile } from '../../utils/animations.jsx';
 
 export const Experience = () => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,7 +33,7 @@ export const Experience = () => {
   return (
     <section id="experience" className="py-10 sm:py-14 flex flex-col gap-4 sm:gap-5 scroll-mt-24 sm:scroll-mt-28">
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
@@ -47,8 +48,8 @@ export const Experience = () => {
       {/* Visual Timeline - Compact */}
       <motion.div
         variants={containerVariants}
-        initial={shouldReduceMotion ? false : "hidden"}
-        whileInView="visible"
+        initial={shouldReduceMotion || isMobile ? false : "hidden"}
+        whileInView={isMobile ? undefined : "visible"}
         viewport={defaultViewport}
         className="relative pl-6 sm:pl-8 flex flex-col gap-5 sm:gap-6 before:absolute before:left-[9px] sm:before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-white/10"
       >

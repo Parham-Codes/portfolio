@@ -3,10 +3,11 @@ import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Layers, Github, ExternalLink } from 'lucide-react';
 import { Button } from '../../components/Button/Button.jsx';
 import { projects } from '../../data/projects.js';
-import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+import { smoothEase, defaultViewport, useIsMobile } from '../../utils/animations.jsx';
 
 export const ProjectsCTA = () => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   // Take top 3 featured projects
   const displayProjects = projects.slice(0, 3);
 
@@ -36,7 +37,7 @@ export const ProjectsCTA = () => {
     <section id="projects-cta" className="py-12 sm:py-16 flex flex-col gap-8">
       {/* Header */}
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
@@ -59,8 +60,8 @@ export const ProjectsCTA = () => {
       {/* 3 Simple Project Cards with Stagger */}
       <motion.div
         variants={containerVariants}
-        initial={shouldReduceMotion ? false : "hidden"}
-        whileInView="visible"
+        initial={shouldReduceMotion || isMobile ? false : "hidden"}
+        whileInView={isMobile ? undefined : "visible"}
         viewport={defaultViewport}
         className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-stretch"
       >
@@ -73,7 +74,7 @@ export const ProjectsCTA = () => {
               variants={cardVariants}
               whileHover={shouldReduceMotion ? undefined : { y: -4 }}
               transition={{ duration: 0.2 }}
-              className="rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md overflow-hidden flex flex-col justify-between hover:border-[#38bdf8]/40 transition-colors duration-300 shadow-xl group"
+              className="rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-md overflow-hidden flex flex-col justify-between hover:border-[#38bdf8]/40 transition-colors duration-300 shadow-xl group"
             >
               {/* Image on top */}
               <div className="w-full h-44 sm:h-48 overflow-hidden bg-[#121620] relative">
@@ -147,11 +148,11 @@ export const ProjectsCTA = () => {
 
       {/* Explore CTA Banner */}
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
-        className="rounded-2xl sm:rounded-3xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+        className="rounded-2xl sm:rounded-3xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
       >
         <div className="flex flex-col gap-1.5 max-w-2xl">
           <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#dfe2ee]">

@@ -14,10 +14,11 @@ import { SectionTitle } from '../../components/SectionTitle/SectionTitle.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 import { useClipboard } from '../../hooks/useClipboard.js';
 import { emailjsConfig } from '../../config/emailjs.js';
-import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+import { smoothEase, defaultViewport, useIsMobile } from '../../utils/animations.jsx';
 
 export const Contact = () => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -134,7 +135,7 @@ export const Contact = () => {
   return (
     <section id="contact" className="py-12 md:py-18 flex flex-col gap-6 sm:gap-8 scroll-mt-24 sm:scroll-mt-28">
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
@@ -150,15 +151,15 @@ export const Contact = () => {
         {/* Contact Info Column (staggered cards) */}
         <motion.div
           variants={cardsContainerVariants}
-          initial={shouldReduceMotion ? false : "hidden"}
-          whileInView="visible"
+          initial={shouldReduceMotion || isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={defaultViewport}
           className="lg:col-span-5 flex flex-col gap-4"
         >
           {/* Telegram Card */}
           <motion.div
             variants={cardVariants}
-            className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
+            className="p-5 rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -199,7 +200,7 @@ export const Contact = () => {
           {/* Email Card */}
           <motion.div
             variants={cardVariants}
-            className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
+            className="p-5 rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -238,7 +239,7 @@ export const Contact = () => {
           {/* GitHub Card */}
           <motion.div
             variants={cardVariants}
-            className="p-5 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
+            className="p-5 rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-2xl shadow-xl flex flex-col gap-3 group card-hover-glow"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -268,11 +269,11 @@ export const Contact = () => {
 
         {/* Contact Form Column (single container animation, no per-field animation) */}
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={defaultViewport}
-          transition={{ duration: 0.5, delay: 0.1, ease: smoothEase }}
-          className="lg:col-span-7 rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-2xl p-6 sm:p-8 shadow-xl"
+          transition={{ duration: 0.5, delay: isMobile ? 0 : 0.1, ease: smoothEase }}
+          className="lg:col-span-7 rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-2xl p-6 sm:p-8 shadow-xl"
         >
           <h3 className="font-display text-xl font-bold text-[#dfe2ee] mb-1">
             Send a Direct Message

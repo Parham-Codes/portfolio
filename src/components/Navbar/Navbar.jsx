@@ -106,7 +106,7 @@ export const Navbar = () => {
         transition={{ duration: 0.45, ease: smoothEase }}
         className="fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-2 sm:pt-3 px-2 sm:px-6"
       >
-        <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
+        <div className="h-14 sm:h-16 w-full max-w-6xl rounded-full bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-xl shadow-xl px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3">
           {/* Logo & Open to Work Badge */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link

@@ -13,7 +13,7 @@ import {
 import { Button } from '../Button/Button.jsx';
 import { ProjectPlaceholder } from '../ProjectPlaceholder/ProjectPlaceholder.jsx';
 import { cn } from '../../utils/cn.js';
-import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+import { smoothEase, defaultViewport, useIsMobile } from '../../utils/animations.jsx';
 
 // Lazy-load modal so it does not inflate the initial bundle or card renders
 const ProjectDetailModal = lazy(() =>
@@ -35,6 +35,7 @@ export const ShowcaseCard = ({
   reversed = false,
 }) => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [initialImageIndex, setInitialImageIndex] = useState(0);
   const [imageError, setImageError] = useState(false);
@@ -107,12 +108,12 @@ export const ShowcaseCard = ({
     <>
       <motion.article
         id={project.id}
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
         className={cn(
-          'group relative rounded-2xl sm:rounded-3xl bg-[#141923]/80 hover:bg-[#181f2c]/90 border border-white/[0.08] hover:border-white/[0.16] backdrop-blur-xl p-4 sm:p-7 md:p-8 transition-all duration-300 shadow-xl hover:shadow-2xl flex flex-col gap-6 sm:gap-8 items-stretch lg:items-center card-hover-glow',
+          'group relative rounded-2xl sm:rounded-3xl bg-[#141923]/92 sm:bg-[#141923]/80 hover:bg-[#181f2c]/90 border border-white/[0.08] hover:border-white/[0.16] backdrop-blur-sm sm:backdrop-blur-xl p-4 sm:p-7 md:p-8 transition-all duration-300 shadow-xl hover:shadow-2xl flex flex-col gap-6 sm:gap-8 items-stretch lg:items-center card-hover-glow',
           theme.activeBorder,
           reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
         )}

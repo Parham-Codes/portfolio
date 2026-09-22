@@ -1,15 +1,16 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle.jsx';
-import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+import { smoothEase, defaultViewport, useIsMobile } from '../../utils/animations.jsx';
 
 export const About = () => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   return (
     <section id="about" className="py-10 sm:py-14 flex flex-col gap-4 sm:gap-5">
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
@@ -23,11 +24,11 @@ export const About = () => {
 
       {/* Single Concise Professional Introduction Card */}
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
-        transition={{ duration: 0.5, delay: 0.08, ease: smoothEase }}
-        className="rounded-2xl bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-md sm:backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col gap-4"
+        transition={{ duration: 0.5, delay: isMobile ? 0 : 0.08, ease: smoothEase }}
+        className="rounded-2xl bg-[#181c24]/95 sm:bg-[#181c24]/90 border border-white/[0.08] backdrop-blur-sm sm:backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-xl flex flex-col gap-4"
       >
         <p className="font-sans text-sm sm:text-base md:text-lg text-[#bdc8d1] leading-relaxed">
           I’m a <span className="text-[#38bdf8] font-semibold">Front-End Developer</span> focused on building responsive, performant, and user-friendly web applications. I turn complex requirements and design mockups into intuitive, clean interfaces that deliver seamless user experiences.

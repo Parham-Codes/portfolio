@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { ProjectCard } from '../../components/ProjectCard/ProjectCard.jsx';
 import { projects } from '../../data/projects.js';
-import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
+import { smoothEase, defaultViewport, useIsMobile } from '../../utils/animations.jsx';
 
 /**
  * ProjectsPage (Development / Coding Projects)
@@ -21,6 +21,7 @@ import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
  */
 export const ProjectsPage = () => {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -104,7 +105,7 @@ export const ProjectsPage = () => {
         initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.06, ease: smoothEase }}
-        className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-2xl bg-[#141923]/60 border border-white/[0.07] backdrop-blur-md"
+        className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-2xl bg-[#141923]/80 sm:bg-[#141923]/60 border border-white/[0.07] backdrop-blur-sm sm:backdrop-blur-md"
       >
         {/* Search Input */}
         <div className="relative flex-1">
@@ -168,7 +169,7 @@ export const ProjectsPage = () => {
 
       {/* 4. Bottom CTA (Unified Structure) */}
       <motion.footer
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
