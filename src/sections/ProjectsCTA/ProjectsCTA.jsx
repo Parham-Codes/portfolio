@@ -155,7 +155,15 @@ export const ProjectsCTA = () => {
           </p>
         </div>
 
-        <div className="shrink-0 w-full sm:w-auto">
+        <div className="shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+          <Button
+            variant="secondary"
+            size="md"
+            to="/wordpress"
+            className="w-full sm:w-auto"
+          >
+            WordPress Work
+          </Button>
           <Button
             variant="primary"
             size="md"
@@ -164,7 +172,7 @@ export const ProjectsCTA = () => {
             iconPosition="right"
             className="w-full sm:w-auto"
           >
-            Explore My Projects
+            Development Projects
           </Button>
         </div>
       </motion.div>

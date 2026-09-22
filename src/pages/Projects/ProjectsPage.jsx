@@ -4,14 +4,21 @@ import { motion, useReducedMotion } from 'motion/react';
 import {
   Search,
   ArrowRight,
-  Layers,
-  Sparkles,
+  Code2,
   Globe,
+  Sparkles,
 } from 'lucide-react';
 import { ProjectCard } from '../../components/ProjectCard/ProjectCard.jsx';
 import { projects } from '../../data/projects.js';
 import { smoothEase, defaultViewport } from '../../utils/animations.jsx';
 
+/**
+ * ProjectsPage (Development / Coding Projects)
+ *
+ * Part of the Unified Project Showcase System.
+ * Shares structural layout, typography hierarchy, spacing, and interaction patterns
+ * with WordPressPage, with content and cyan accents tailored to development projects.
+ */
 export const ProjectsPage = () => {
   const shouldReduceMotion = useReducedMotion();
   const [searchQuery, setSearchQuery] = useState('');
@@ -21,7 +28,7 @@ export const ProjectsPage = () => {
   const categories = useMemo(() => {
     const cats = ['All'];
     projects.forEach((p) => {
-      if (!cats.includes(p.category)) {
+      if (p.category && !cats.includes(p.category)) {
         cats.push(p.category);
       }
     });
@@ -39,7 +46,7 @@ export const ProjectsPage = () => {
 
       const matchesSearch =
         project.title.toLowerCase().includes(q) ||
-        project.description.toLowerCase().includes(q) ||
+        (project.description && project.description.toLowerCase().includes(q)) ||
         (project.shortLabel && project.shortLabel.toLowerCase().includes(q)) ||
         (project.technologies &&
           project.technologies.some((t) => t.toLowerCase().includes(q))) ||
@@ -52,162 +59,147 @@ export const ProjectsPage = () => {
 
   return (
     <div className="py-8 sm:py-12 flex flex-col gap-10 sm:gap-14">
-      {/* Page Header */}
-      <motion.div
+      {/* 1. Page Header (Unified Structure) */}
+      <motion.header
         initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: smoothEase }}
         className="flex flex-col gap-4 max-w-3xl"
       >
+        {/* Eyebrow and Page Switcher */}
         <div className="flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/30 font-mono text-xs text-[#38bdf8] font-bold flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5" />
-              Projects Showcase
+          <div className="flex items-center gap-2.5">
+            <span className="px-3 py-1 rounded-full bg-[#38bdf8]/12 border border-[#38bdf8]/25 font-mono text-xs text-[#38bdf8] font-bold flex items-center gap-1.5">
+              <Code2 className="w-3.5 h-3.5" />
+              Development Showcase
             </span>
-            <span className="font-mono text-xs text-[#56e5a9] flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#56e5a9] animate-pulse" />
-              {projects.length} Practical Projects
+            <span className="font-mono text-xs text-[#87929a]">
+              {projects.length} Projects
             </span>
           </div>
 
           <Link
             to="/wordpress"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 text-emerald-300 font-sans text-xs font-semibold transition-colors group"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 text-[#56e5a9] font-sans text-xs font-semibold transition-colors group"
           >
-            <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>View WordPress Projects</span>
+            <Globe className="w-3.5 h-3.5 text-[#56e5a9]" />
+            <span>WordPress Projects</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
+        {/* Title */}
         <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#dfe2ee] tracking-tight leading-tight">
-          Projects &amp; Codebases
+          Development Projects
         </h1>
+
+        {/* Short Description */}
         <p className="font-sans text-sm sm:text-base text-[#bdc8d1] leading-relaxed">
-          Explore my key projects built with React, Redux Toolkit, and modern JavaScript, with clean architectures, e-commerce workflows, and REST API integration.
+          Web applications and software engineering projects built with React, modern JavaScript, modular state management, and REST APIs.
         </p>
-      </motion.div>
+      </motion.header>
 
-      {/* Search & Filter Toolbar */}
+      {/* 2. Project Controls (Streamlined, Minimal Filter Bar) */}
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.08, ease: smoothEase }}
-        className="rounded-2xl bg-[#181c24]/80 border border-white/[0.08] p-4 sm:p-5 backdrop-blur-xl flex flex-col gap-4 shadow-xl"
+        transition={{ duration: 0.45, delay: 0.06, ease: smoothEase }}
+        className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-2xl bg-[#141923]/60 border border-white/[0.07] backdrop-blur-md"
       >
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
-          {/* Search Field */}
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-[#87929a] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by tech (React, Redux, Node) or project name..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0a0e16] border border-white/10 text-[#dfe2ee] placeholder:text-[#87929a] text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-all"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-[#87929a] hover:text-white px-1.5 py-0.5 rounded bg-white/10"
-              >
-                Clear
-              </button>
-            )}
-          </div>
-
-          {/* Quick Counter */}
-          <div className="font-mono text-xs text-[#87929a] shrink-0 self-start md:self-center">
-            Showing <span className="text-[#38bdf8] font-bold">{filteredProjects.length}</span> of {projects.length} Projects
-          </div>
+        {/* Search Input */}
+        <div className="relative flex-1">
+          <Search className="w-4 h-4 text-[#87929a] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search projects by tech (React, Redux) or title..."
+            className="w-full pl-10 pr-16 py-2 rounded-xl bg-[#090d16] border border-white/[0.08] text-[#dfe2ee] placeholder:text-[#87929a] text-xs sm:text-sm focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-all"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-[#87929a] hover:text-white px-1.5 py-0.5 rounded bg-white/10 cursor-pointer"
+            >
+              Clear
+            </button>
+          )}
         </div>
 
-        {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-          {categories.map((cat) => {
-            const isActive = selectedCategory === cat;
-            const count =
-              cat === 'All'
-                ? projects.length
-                : projects.filter((p) => p.category === cat).length;
-
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`font-sans text-xs font-semibold px-3.5 py-1.5 rounded-full whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
-                  isActive
-                    ? 'bg-[#38bdf8] text-[#00354a] shadow-md shadow-[#38bdf8]/25'
-                    : 'bg-[#1c2028] text-[#bdc8d1] hover:text-white hover:bg-[#262a33] border border-white/5'
-                }`}
-              >
-                <span>{cat}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    isActive ? 'bg-[#00354a]/20 text-[#00354a] font-bold' : 'bg-black/30 text-[#87929a]'
-                  }`}
-                >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
+        {/* Quick Result Counter */}
+        <div className="font-mono text-xs text-[#87929a] shrink-0 px-2 flex items-center gap-1.5 self-end sm:self-center">
+          <span>Showing</span>
+          <span className="text-[#38bdf8] font-bold">{filteredProjects.length}</span>
+          <span>of {projects.length}</span>
         </div>
       </motion.div>
 
-      {/* Projects List */}
-      <div className="flex flex-col gap-8 md:gap-12">
+      {/* 3. Project Showcase List */}
+      <section className="flex flex-col gap-8 sm:gap-12" aria-label="Projects Showcase">
         {filteredProjects.length > 0 ? (
           filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} reversed={index % 2 === 1} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              reversed={index % 2 === 1}
+            />
           ))
         ) : (
-          <div className="rounded-2xl bg-[#181c24]/40 border border-dashed border-white/15 p-12 text-center flex flex-col items-center justify-center gap-3">
+          <div className="rounded-2xl bg-[#141923]/40 border border-dashed border-white/15 p-12 text-center flex flex-col items-center justify-center gap-3">
             <Search className="w-8 h-8 text-[#87929a]" />
             <h3 className="font-display text-lg font-bold text-[#dfe2ee]">
-              No projects found matching "{searchQuery}"
+              No development projects found matching "{searchQuery}"
             </h3>
             <p className="font-sans text-xs sm:text-sm text-[#87929a] max-w-md">
-              Try searching for "React", "Redux", or "Node", or reset filters to see all projects.
+              Try searching for "React", "Vite", or clear search query to browse all projects.
             </p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('All');
               }}
-              className="mt-2 px-4 py-2 rounded-xl bg-[#262a33] hover:bg-[#31353e] text-[#38bdf8] text-xs font-semibold font-sans transition-colors border border-white/10"
+              className="mt-2 px-4 py-2 rounded-xl bg-[#1e2533] hover:bg-[#283244] text-[#38bdf8] text-xs font-semibold font-sans transition-colors border border-white/10 cursor-pointer"
             >
               Show All Projects
             </button>
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Bottom Conversion Prompt */}
-      <motion.div
+      {/* 4. Bottom CTA (Unified Structure) */}
+      <motion.footer
         initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={defaultViewport}
         transition={{ duration: 0.5, ease: smoothEase }}
-        className="rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#181c24] via-[#1c2028] to-[#181c24] border border-white/10 p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left mt-4"
+        className="rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#141923] via-[#19202c] to-[#141923] border border-white/10 p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left mt-4 shadow-xl"
       >
         <div className="flex flex-col gap-2">
           <h3 className="font-display text-xl sm:text-2xl font-bold text-[#dfe2ee]">
-            Have an opportunity or project?
+            Looking for a Front-End or Full-Stack Developer?
           </h3>
           <p className="font-sans text-xs sm:text-sm text-[#bdc8d1] max-w-xl">
-            Open to Front-End opportunities, freelance projects, and collaborative web development.
+            Open to software engineering opportunities, product development, and collaborative web projects.
           </p>
         </div>
-        <Link
-          to="/#contact"
-          className="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#38bdf8] hover:bg-[#7bd0ff] text-[#00354a] font-sans text-sm font-bold shadow-lg shadow-[#38bdf8]/20 transition-all min-h-[44px]"
-        >
-          <span>Send Me a Message</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </motion.div>
+        <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <Link
+            to="/wordpress"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-[#dfe2ee] hover:text-white font-sans text-sm font-semibold border border-white/10 transition-all min-h-[44px]"
+          >
+            <span>WordPress Projects</span>
+            <ArrowRight className="w-4 h-4 text-[#56e5a9]" />
+          </Link>
+          <Link
+            to="/#contact"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#38bdf8] hover:bg-[#7bd0ff] text-[#00354a] font-sans text-sm font-bold shadow-lg shadow-[#38bdf8]/20 transition-all min-h-[44px]"
+          >
+            <span>Get in Touch</span>
+          </Link>
+        </div>
+      </motion.footer>
     </div>
   );
 };
+
+export default ProjectsPage;
