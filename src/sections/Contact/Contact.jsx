@@ -133,7 +133,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-18 flex flex-col gap-6 sm:gap-8 scroll-mt-24 sm:scroll-mt-28">
+    <section id="contact" className="py-10 sm:py-14 flex flex-col gap-6 sm:gap-8 scroll-mt-10 sm:scroll-mt-11">
       <motion.div
         initial={shouldReduceMotion || isMobile ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

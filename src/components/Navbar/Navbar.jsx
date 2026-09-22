@@ -61,7 +61,7 @@ export const Navbar = () => {
       if (location.pathname === '/') {
         const target = document.getElementById('experience');
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           window.history.pushState(null, '', '#experience');
         }
       } else {
@@ -74,7 +74,7 @@ export const Navbar = () => {
       if (location.pathname === '/') {
         const target = document.getElementById('contact');
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           window.history.pushState(null, '', '#contact');
         }
       } else {
@@ -90,7 +90,7 @@ export const Navbar = () => {
     if (location.pathname === '/') {
       const target = document.getElementById('contact');
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         window.history.pushState(null, '', '#contact');
       }
     } else {

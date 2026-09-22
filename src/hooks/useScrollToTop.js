@@ -22,7 +22,7 @@ export function useScrollToTop() {
         if (cancelled) return;
         const element = document.getElementById(cleanHash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else if (attempts < 25) {
           // Retry for up to ~500ms while DOM mounts
           attempts++;

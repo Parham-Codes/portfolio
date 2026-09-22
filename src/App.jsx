@@ -6,6 +6,7 @@ import { Footer } from './components/Footer/Footer.jsx';
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.jsx';
 import { HomePage } from './pages/Home/HomePage.jsx';
 import { useScrollToTop } from './hooks/useScrollToTop.js';
+import { usePageTracking } from './hooks/usePageTracking.js';
 
 // Route-level code splitting for secondary pages
 const ProjectsPage = lazy(() =>
@@ -23,6 +24,7 @@ const PageRouteLoader = () => (
 
 export const App = () => {
   useScrollToTop();
+  usePageTracking();
 
   return (
     <div className="min-h-screen bg-[#070a12] text-[#dfe2ee] font-sans antialiased selection:bg-[#38bdf8]/30 selection:text-white flex flex-col relative overflow-x-hidden">
