@@ -1,20 +1,16 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Background } from './components/Background/Background.jsx';
 import { Navbar } from './components/Navbar/Navbar.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.jsx';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary.jsx';
 import { HomePage } from './pages/Home/HomePage.jsx';
 import { useScrollToTop } from './hooks/useScrollToTop.js';
 import { usePageTracking } from './hooks/usePageTracking.js';
 
-// Route-level code splitting for secondary pages
-const ProjectsPage = lazy(() =>
-  import('./pages/Projects/ProjectsPage.jsx').then((module) => ({ default: module.ProjectsPage }))
-);
-const WordPressPage = lazy(() =>
-  import('./pages/WordPress/WordPressPage.jsx').then((module) => ({ default: module.WordPressPage }))
-);
+import { ProjectsPage } from './pages/Projects/ProjectsPage.jsx';
+import { WordPressPage } from './pages/WordPress/WordPressPage.jsx';
 
 const PageRouteLoader = () => (
   <div className="w-full min-h-[45vh] flex items-center justify-center" aria-busy="true">
@@ -39,14 +35,16 @@ export const App = () => {
 
       {/* Main Container */}
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 z-10">
-        <Suspense fallback={<PageRouteLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/wordpress" element={<WordPressPage />} />
-            <Route path="*" element={<HomePage />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageRouteLoader />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/wordpress" element={<WordPressPage />} />
+              <Route path="*" element={<HomePage />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
 
       {/* Global Footer */}
