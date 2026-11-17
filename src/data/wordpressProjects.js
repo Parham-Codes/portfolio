@@ -35,59 +35,359 @@
 
 export const wordpressProjects = [
   {
-    id: 'alipournut',
-    name: 'AlipourNut',
-    title: 'AlipourNut',
-    category: 'WordPress / E-Commerce',
+    id: 'vip-car-service',
+    name: 'VIP Car Service',
+    title: 'VIP Car Service',
+    category: 'WordPress / Automotive / E-Commerce / Business Management',
     status: 'In Development',
-    shortLabel: 'Dried Fruits & Nuts Online Store',
-    shortTitle: 'AlipourNut',
+
+    shortLabel: 'Automotive Service Management & E-Commerce Platform',
+    shortTitle: 'VIP Car Service',
+
     description:
-      'An active WordPress and Woodmart e-commerce website currently under development for dried fruits and nuts, with focus on category grid layout and RTL presentation.',
+      'A comprehensive automotive platform combining an online store with custom business management software for service reception, vehicle records, inventory, invoicing, installment payments, SMS automation, and appointment booking.',
+
     fullDescription:
-      'AlipourNut is a WordPress e-commerce website currently in development for dried fruits and nuts.\n\nWork centers on store layout design, Woodmart theme configuration, and RTL category grid adjustments around selector .wd-cats-element .wd-grid-g within an 1140px container (4 columns, 267px item width, 24px gap) to ensure balanced alignment and responsive spacing.',
-    accuracyNote:
-      'Active project in development. Layout work involves Woodmart category grid styling (.wd-cats-element .wd-grid-g) within an 1140px container (4 columns, 267px item width, 24px gap) under RTL conditions.',
+      'VIP Car Service is a large-scale software project being developed for a VIP automotive service center. Rather than functioning as a conventional business website, the platform combines an online store with a custom operational management system designed to handle the business workflows of an automotive service center.\n\nThe platform is designed to connect online product sales with in-store service operations through a shared inventory system. Staff will be able to register customers and their vehicles, record license plates, create service orders, add consumed products and services, calculate costs, and automatically deduct used materials from inventory.\n\nThe financial management module is designed to support manual invoices, custom invoice items, credit-based sales, consignment transactions, installment payment schedules, due-date tracking, and customer invoice delivery through SMS.\n\nAn automated messaging system is also part of the planned platform. It is intended to send upcoming vehicle maintenance reminders, payment and installment reminders, appointment confirmations, and appointment notifications.\n\nOn the customer-facing side, the system will provide an online appointment booking workflow. Customers will be able to select their vehicle, choose the required service, and request an appointment for a preferred date and time.\n\nCustomer accounts are designed to be synchronized using mobile phone numbers, allowing in-store transactions and vehicle service records to be associated with existing customer accounts whenever possible.\n\nThe platform will also provide reporting for sales, financial activity, and inventory movements, helping the business manage its operations through one integrated solution.\n\nThe project is currently under active development. Its scope includes both the online store and the custom operational management system; the planned modules must not be presented as fully completed or already available in production.',
+
+    accuracyNote: null,
+
     features: [
-      'WordPress website design and Woodmart theme setup in development',
-      'Woodmart category grid layout adjustment (.wd-cats-element .wd-grid-g)',
-      'RTL presentation and spacing within an 1140px container (4 columns, 267px width, 24px gap)',
-      'Online store structure and category organization',
-      'Responsive design testing across screen widths',
+      'Online WooCommerce store for automotive consumables and accessories',
+      'In-store customer reception and vehicle registration',
+      'Vehicle records with license plate and customer information',
+      'Service order creation and management',
+      'Automatic service cost calculations and consumed-item recording',
+      'Shared inventory between online sales and in-store services',
+      'Manual invoices with custom line items',
+      'Credit-based sales, consignment transactions, and installment payments',
+      'Payment due-date tracking and outstanding balance management',
+      'SMS invoice delivery and automated payment reminders',
+      'Vehicle maintenance reminders based on service dates and mileage',
+      'Online automotive service appointment booking',
+      'Customer account synchronization using mobile phone numbers',
+      'Financial, sales, and inventory reporting'
     ],
+
     keyWins: [
-      'Store layout and category architecture for dried fruits and nuts',
-      'Fine-tuned Woodmart RTL category grid spacing and item distribution',
+      'Combines an online automotive store with custom in-store operational management',
+      'Connects vehicle service orders and online purchases to one shared inventory',
+      'Integrates invoice management, credit sales, installments, and payment tracking',
+      'Automates customer communication through SMS reminders',
+      'Brings customer records, vehicle history, and appointment workflows into one platform',
+      'Designed to reduce reliance on separate business management and accounting tools'
     ],
+
     technicalFocus: [
-      'WordPress & Woodmart development',
-      'Woodmart theme configuration',
-      'RTL styling & category grid customization (.wd-grid-g)',
-      'Responsive design & spacing',
+      'Custom WordPress development',
+      'WooCommerce integration',
+      'Custom business management workflows',
+      'In-store service reception and work-order management',
+      'Vehicle and customer record management',
+      'Shared inventory synchronization',
+      'Manual invoice and installment management',
+      'SMS API integration and automated notifications',
+      'Online appointment booking workflows',
+      'Customer account synchronization',
+      'Financial and inventory reporting',
+      'Custom PHP and plugin development'
     ],
+
     technologies: [
       'WordPress',
-      'Woodmart',
+      'WooCommerce',
+      'PHP',
+      'Custom Plugin Development',
+      'SMS API Integration'
     ],
+
     tags: [
       'WordPress',
-      'Woodmart',
-      'E-Commerce',
-      'In Development',
-      'RTL',
+      'WooCommerce',
+      'Automotive',
+      'Custom Development',
+      'CRM',
+      'ERP',
+      'Inventory Management',
+      'Service Management',
+      'Vehicle Management',
+      'Invoice Management',
+      'Installment Payments',
+      'SMS Automation',
+      'Appointment Booking',
+      'In Development'
     ],
+
     githubUrl: null,
     apiRepoUrl: null,
-    liveUrl: 'https://alipournut.com',
+    liveUrl: null,
+
     featured: false,
-    windowFile: 'AlipourNut // Woodmart [In Development]',
+
+    windowFile: 'VIP Car Service // Automotive Management Platform',
+
     image: null,
     cardImage: null,
     gallery: [],
+
     accent: 'amber',
-    hudTitle: 'In Development',
-    hudSub: 'Woodmart · RTL Grid',
-    hudBadge: 'IN DEV',
+
+    hudTitle: 'Automotive Operations Platform',
+    hudSub: 'E-Commerce · CRM/ERP Workflows',
+    hudBadge: 'IN DEVELOPMENT'
+  },
+  {
+    id: 'boorkas',
+    name: 'Boorkas',
+    title: 'Boorkas',
+    category: 'WordPress / Fashion / E-Commerce',
+    status: 'Completed / Client Project',
+
+    shortLabel: 'Boutique Clothing Online Store',
+    shortTitle: 'Boorkas',
+
+    description:
+      'A completed boutique e-commerce website developed for a clothing business, featuring a customized WooCommerce storefront with particular attention to product-card design, product presentation, and refined product archive layouts.',
+
+    fullDescription:
+      'Boorkas is a completed e-commerce project developed for a boutique clothing business.\n\nThe website provides an online shopping experience built with WordPress and WooCommerce, with a focus on presenting clothing products through a carefully customized storefront.\n\nA key aspect of the project is the visual customization of product cards and product archive layouts. Dedicated styling adjustments were implemented to create a distinctive and consistent presentation of product images, information, pricing, and shopping elements.\n\nThe project also involved Woodmart customization and custom CSS development to refine the overall storefront experience and product catalog presentation.\n\nThe website has been completed and delivered as a client project.',
+
+    accuracyNote: null,
+
+    features: [
+      'Boutique-style online clothing store',
+      'WordPress and WooCommerce e-commerce implementation',
+      'Customized product-card design and styling',
+      'Custom product archive and grid layouts',
+      'Refined product information presentation',
+      'Woodmart storefront customization',
+      'Custom CSS adjustments for the product catalog'
+    ],
+
+    keyWins: [
+      'Customized product-card presentation for a boutique clothing store',
+      'Dedicated visual refinement of product archive and catalog layouts',
+      'Woodmart-based storefront customization',
+      'Completed boutique e-commerce implementation'
+    ],
+
+    technicalFocus: [
+      'WordPress development',
+      'WooCommerce product catalog customization',
+      'Woodmart theme customization',
+      'Custom product-card UI design',
+      'Product archive and grid styling',
+      'Custom CSS',
+      'Responsive storefront refinement'
+    ],
+
+    technologies: [
+      'WordPress',
+      'WooCommerce',
+      'Woodmart',
+      'Custom CSS'
+    ],
+
+    tags: [
+      'WordPress',
+      'WooCommerce',
+      'Woodmart',
+      'E-Commerce',
+      'Fashion',
+      'Boutique',
+      'Product Cards',
+      'Product Grid',
+      'Custom CSS'
+    ],
+
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: 'https://boorkas.com/',
+
+    featured: false,
+
+    windowFile: 'Boorkas // Woodmart & WooCommerce',
+
+    image: `${import.meta.env.BASE_URL}images/boorkas/home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/boorkas/home.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/boorkas/home.webp`,
+      `${import.meta.env.BASE_URL}images/boorkas/shop.webp`,
+      `${import.meta.env.BASE_URL}images/boorkas/about.webp`,
+      `${import.meta.env.BASE_URL}images/boorkas/contact.webp`,
+    ],
+
+    accent: 'emerald',
+
+    hudTitle: 'Boutique E-Commerce Store',
+    hudSub: 'Woodmart · WooCommerce · Custom UI',
+    hudBadge: 'COMPLETED'
+  },
+  {
+    id: 'poshak-eliza',
+    name: 'Poshak Eliza',
+    title: 'Poshak Eliza',
+    category: "WordPress / Women's Fashion / E-Commerce",
+    status: 'Completed / Client Project',
+
+    shortLabel: "Women's Fashion Online Store",
+    shortTitle: 'Poshak Eliza',
+
+    description:
+      "A completed women's fashion e-commerce store built with WordPress and WooCommerce, featuring a custom-developed order-tracking extension for customers.",
+
+    fullDescription:
+      "Poshak Eliza is a completed e-commerce website developed for a women's clothing business.\n\nThe website provides an online shopping experience focused on women's fashion, with a dedicated product catalog and WooCommerce-powered shopping functionality.\n\nA particularly important part of the project is its custom-developed order-tracking extension. This functionality provides customers with a dedicated way to follow their purchases and check their order progress.\n\nThe project combines WordPress and WooCommerce development with custom functionality designed around the store's business requirements.\n\nThe website has been completed and delivered as a client project.",
+
+    accuracyNote: null,
+
+    features: [
+      "Online store dedicated to women's clothing and fashion",
+      'WooCommerce product catalog and shopping functionality',
+      'Dedicated product presentation and store pages',
+      'Custom-developed order-tracking extension',
+      'Customer order-tracking functionality',
+      'E-commerce frontend customization'
+    ],
+
+    keyWins: [
+      "Completed e-commerce website for a women's fashion business",
+      'Custom order-tracking functionality integrated with the store',
+      'WooCommerce implementation tailored to the business requirements'
+    ],
+
+    technicalFocus: [
+      'WordPress development',
+      'WooCommerce e-commerce implementation',
+      'Custom plugin development',
+      'PHP and custom WordPress functionality',
+      'Order-tracking workflows',
+      'E-commerce frontend customization'
+    ],
+
+    technologies: [
+      'WordPress',
+      'WooCommerce',
+      'PHP',
+      'Custom Plugin Development'
+    ],
+
+    tags: [
+      'WordPress',
+      'WooCommerce',
+      "Women's Fashion",
+      'E-Commerce',
+      'PHP',
+      'Custom Development',
+      'Order Tracking'
+    ],
+
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: 'https://poshakeliza.com/',
+
+    featured: false,
+
+    windowFile: 'Poshak Eliza // WordPress & WooCommerce',
+
+    image: `${import.meta.env.BASE_URL}images/poshakeliza/home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/poshakeliza/home.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/poshakeliza/home.webp`,
+      `${import.meta.env.BASE_URL}images/poshakeliza/home2.webp`,
+      `${import.meta.env.BASE_URL}images/poshakeliza/shop.webp`,
+      `${import.meta.env.BASE_URL}images/poshakeliza/about.webp`,
+      `${import.meta.env.BASE_URL}images/poshakeliza/contact.webp`,
+    ],
+
+    accent: 'emerald',
+
+    hudTitle: "Women's Fashion Store",
+    hudSub: 'WooCommerce · Custom Order Tracking',
+    hudBadge: 'COMPLETED'
+  },
+  {
+    id: 'alipournut',
+    name: 'AlipourNut',
+    title: 'AlipourNut',
+    category: 'WordPress / E-Commerce / Custom Development',
+    status: 'Completed / Client Project',
+
+    shortLabel: 'Nuts & Dried Fruits Online Store',
+    shortTitle: 'AlipourNut',
+
+    description:
+      'A completed WordPress and WooCommerce online store specializing in nuts, dried fruits, and related products, featuring a custom-developed order-tracking extension that allows customers to follow their purchases.',
+
+    fullDescription:
+      'AlipourNut is a completed e-commerce project developed for a business specializing in nuts, dried fruits, and related products.\n\nThe website provides a complete online shopping experience, including product presentation, product catalog navigation, and WooCommerce-powered shopping functionality.\n\nA key part of the project is a custom-developed order-tracking extension, built specifically for the store to provide customers with a dedicated way to track their orders.\n\nThe project combines WordPress and WooCommerce implementation with custom functionality tailored to the business requirements.',
+
+    accuracyNote: null,
+
+    features: [
+      'Online store specializing in nuts and dried fruits',
+      'WooCommerce-powered product catalog and shopping experience',
+      'Custom-developed order-tracking extension',
+      'Dedicated customer order-tracking functionality',
+      'E-commerce storefront customization',
+      'Product presentation and store navigation'
+    ],
+
+    keyWins: [
+      'Completed e-commerce implementation for a nuts and dried fruits business',
+      'Custom-developed order-tracking extension beyond standard store functionality',
+      'Integration of custom order-tracking functionality into the WooCommerce store'
+    ],
+
+    technicalFocus: [
+      'WordPress development',
+      'WooCommerce e-commerce implementation',
+      'Custom order-tracking extension development',
+      'PHP and custom WordPress functionality',
+      'E-commerce frontend customization'
+    ],
+
+    technologies: [
+      'WordPress',
+      'WooCommerce',
+      'Woodmart',
+      'PHP',
+      'Custom Plugin Development'
+    ],
+
+    tags: [
+      'WordPress',
+      'WooCommerce',
+      'Woodmart',
+      'PHP',
+      'E-Commerce',
+      'Custom Development',
+      'Order Tracking',
+      'Nuts & Dried Fruits'
+    ],
+
+    githubUrl: null,
+    apiRepoUrl: null,
+    liveUrl: 'https://alipournut.com/',
+
+    featured: false,
+
+    windowFile: 'AlipourNut // WordPress & WooCommerce',
+
+    image: `${import.meta.env.BASE_URL}images/alipournuts/home.webp`,
+    cardImage: `${import.meta.env.BASE_URL}images/alipournuts/home.webp`,
+    gallery: [
+      `${import.meta.env.BASE_URL}images/alipournuts/home.webp`,
+      `${import.meta.env.BASE_URL}images/alipournuts/shop.webp`,
+      `${import.meta.env.BASE_URL}images/alipournuts/about.webp`,
+      `${import.meta.env.BASE_URL}images/alipournuts/contact.webp`,
+    ],
+
+    accent: 'amber',
+
+    hudTitle: 'Custom Order Tracking',
+    hudSub: 'WooCommerce · Custom Extension',
+    hudBadge: 'COMPLETED'
   },
   {
     id: 'mahour-gallery',

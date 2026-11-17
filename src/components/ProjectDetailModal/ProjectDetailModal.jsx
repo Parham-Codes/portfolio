@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
@@ -112,6 +112,69 @@ export const ProjectDetailModal = ({
     };
   }, [isOpen, onClose, images.length]);
 
+  const thumbnailsRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartX = useRef(0);
+  const scrollStartX = useRef(0);
+  const hasDragged = useRef(false);
+
+  // Auto-scroll active thumbnail into view
+  useEffect(() => {
+    if (!thumbnailsRef.current || !isOpen) return;
+    const activeThumb = thumbnailsRef.current.children[activeImageIndex];
+    if (activeThumb) {
+      activeThumb.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [activeImageIndex, isOpen]);
+
+  // Mouse wheel horizontal scroll for thumbnails
+  useEffect(() => {
+    const el = thumbnailsRef.current;
+    if (!el || !isOpen) return;
+
+    const handleWheel = (e) => {
+      if (el.scrollWidth > el.clientWidth) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          el.scrollLeft += e.deltaY;
+        }
+      }
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [isOpen, images.length]);
+
+  const handleMouseDown = (e) => {
+    const el = thumbnailsRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    hasDragged.current = false;
+    dragStartX.current = e.pageX - el.offsetLeft;
+    scrollStartX.current = el.scrollLeft;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const el = thumbnailsRef.current;
+    if (!el) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - dragStartX.current) * 1.5;
+    if (Math.abs(walk) > 4) {
+      hasDragged.current = true;
+    }
+    el.scrollLeft = scrollStartX.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    setIsDragging(false);
+  };
+
   if (!isOpen || !project) return null;
 
   const hasLiveUrl = Boolean(
@@ -207,7 +270,7 @@ export const ProjectDetailModal = ({
 
               {/* Screenshot / Gallery Viewer or Universal Placeholder */}
               <div className="flex flex-col gap-3">
-                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#070a12] aspect-[16/10] max-h-[460px] group shadow-inner">
+                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#070a12] aspect-[16/10] max-h-[460px] sm:max-h-[500px] flex items-center justify-center group shadow-inner">
                   {activeImage && !imageError ? (
                     <img
                       src={activeImage}
@@ -216,7 +279,7 @@ export const ProjectDetailModal = ({
                       width="800"
                       height="500"
                       onError={() => setImageError(true)}
-                      className="w-full h-full object-cover object-top transition-transform duration-500"
+                      className="w-full h-full object-contain select-none transition-all duration-300"
                     />
                   ) : (
                     <ProjectPlaceholder
@@ -237,7 +300,7 @@ export const ProjectDetailModal = ({
                             prev === 0 ? images.length - 1 : prev - 1
                           )
                         }
-                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100 z-10"
                         aria-label="Previous image"
                       >
                         <ChevronLeft className="w-5 h-5" />
@@ -248,14 +311,14 @@ export const ProjectDetailModal = ({
                             prev === images.length - 1 ? 0 : prev + 1
                           )
                         }
-                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 opacity-80 hover:opacity-100 z-10"
                         aria-label="Next image"
                       >
                         <ChevronRight className="w-5 h-5" />
                       </button>
 
                       {/* Image index counter */}
-                      <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] text-[#dfe2ee]">
+                      <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] text-[#dfe2ee] z-10">
                         {activeImageIndex + 1} / {images.length}
                       </div>
                     </>
@@ -264,13 +327,27 @@ export const ProjectDetailModal = ({
 
                 {/* Thumbnail Row if multiple images */}
                 {images.length > 1 && !imageError && (
-                  <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                  <div
+                    ref={thumbnailsRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUpOrLeave}
+                    onMouseLeave={handleMouseUpOrLeave}
+                    className={cn(
+                      'flex items-center gap-2.5 overflow-x-auto py-2.5 px-1.5 select-none scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent touch-pan-x cursor-grab',
+                      isDragging && 'cursor-grabbing'
+                    )}
+                  >
                     {images.map((img, idx) => (
                       <button
                         key={idx}
-                        onClick={() => setActiveImageIndex(idx)}
+                        onClick={() => {
+                          if (!hasDragged.current) {
+                            setActiveImageIndex(idx);
+                          }
+                        }}
                         className={cn(
-                          'relative w-16 sm:w-20 aspect-[16/10] rounded-lg overflow-hidden border shrink-0 transition-all cursor-pointer',
+                          'relative w-18 sm:w-22 aspect-[16/10] rounded-lg overflow-hidden border shrink-0 transition-all cursor-pointer',
                           activeImageIndex === idx
                             ? themeStyles.activeThumb
                             : 'border-white/10 opacity-60 hover:opacity-100'
@@ -281,9 +358,10 @@ export const ProjectDetailModal = ({
                           alt={`${project.title} thumb ${idx + 1}`}
                           loading="lazy"
                           decoding="async"
-                          width="80"
-                          height="50"
-                          className="w-full h-full object-cover object-top"
+                          width="88"
+                          height="55"
+                          draggable={false}
+                          className="w-full h-full object-cover object-top pointer-events-none select-none"
                         />
                       </button>
                     ))}
