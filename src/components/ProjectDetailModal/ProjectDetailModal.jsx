@@ -71,13 +71,20 @@ export const ProjectDetailModal = ({
 
   const [activeImageIndex, setActiveImageIndex] = useState(initialImageIndex);
   const [imageError, setImageError] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
       setActiveImageIndex(Math.max(0, Math.min(initialImageIndex, Math.max(0, images.length - 1))));
       setImageError(false);
+      setIsImageLoading(true);
     }
   }, [isOpen, initialImageIndex, images.length]);
+
+  useEffect(() => {
+    setIsImageLoading(true);
+    setImageError(false);
+  }, [activeImageIndex]);
 
   // Keyboard navigation & scroll lock
   useEffect(() => {
@@ -272,15 +279,57 @@ export const ProjectDetailModal = ({
               <div className="flex flex-col gap-3">
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#070a12] aspect-[16/10] max-h-[460px] sm:max-h-[500px] flex items-center justify-center group shadow-inner">
                   {activeImage && !imageError ? (
-                    <img
-                      src={activeImage}
-                      alt={project.title}
-                      decoding="async"
-                      width="800"
-                      height="500"
-                      onError={() => setImageError(true)}
-                      className="w-full h-full object-contain select-none transition-all duration-300"
-                    />
+                    <>
+                      {isImageLoading && (
+                        <div className="absolute inset-0 z-0 flex flex-col items-center justify-center bg-[#070a12] gap-3">
+                          <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center">
+                            <div className="absolute inset-0 rounded-full border border-white/[0.08]" />
+                            <div
+                              className={cn(
+                                'absolute inset-0 rounded-full border-2 border-transparent animate-spin',
+                                isWordPress
+                                  ? 'border-t-[#56e5a9] border-r-[#56e5a9]/40'
+                                  : 'border-t-[#38bdf8] border-r-[#38bdf8]/40'
+                              )}
+                              style={{ animationDuration: '0.8s' }}
+                            />
+                            <div
+                              className={cn(
+                                'w-2 h-2 rounded-full animate-pulse',
+                                isWordPress
+                                  ? 'bg-[#56e5a9] shadow-[0_0_8px_#56e5a9]'
+                                  : 'bg-[#38bdf8] shadow-[0_0_8px_#38bdf8]'
+                              )}
+                            />
+                          </div>
+                          <span className="font-mono text-[11px] text-white/40 tracking-wider uppercase">
+                            Loading Preview...
+                          </span>
+                          <div
+                            className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/[0.03] to-transparent animate-shimmer"
+                            style={{ backgroundSize: '200% 100%' }}
+                          />
+                        </div>
+                      )}
+
+                      <img
+                        key={activeImage}
+                        src={activeImage}
+                        alt={project.title}
+                        decoding="async"
+                        width="800"
+                        height="500"
+                        onLoad={() => setIsImageLoading(false)}
+                        onError={() => {
+                          setIsImageLoading(false);
+                          setImageError(true);
+                        }}
+                        className={cn(
+                          'w-full h-full object-contain select-none transition-opacity duration-300 relative z-[1]',
+                          isImageLoading ? 'opacity-0' : 'opacity-100'
+                        )}
+                      />
+                    </>
                   ) : (
                     <ProjectPlaceholder
                       title={project.title}

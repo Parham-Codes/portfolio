@@ -39,6 +39,7 @@ export const ShowcaseCard = ({
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [initialImageIndex, setInitialImageIndex] = useState(0);
   const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const isWordPress = type === 'wordpress';
 
@@ -125,16 +126,51 @@ export const ShowcaseCard = ({
             className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] bg-[#090d16] aspect-[16/10] group/img cursor-pointer shadow-lg transition-transform duration-300"
           >
             {previewImage && !imageError ? (
-              <img
-                src={previewImage}
-                alt={project.title}
-                loading="lazy"
-                decoding="async"
-                width="640"
-                height="400"
-                onError={() => setImageError(true)}
-                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-[1.03]"
-              />
+              <>
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#090d16] z-0">
+                    <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
+                      <div className="absolute inset-0 rounded-full border border-white/[0.08]" />
+                      <div
+                        className={cn(
+                          'absolute inset-0 rounded-full border-2 border-transparent animate-spin',
+                          isWordPress
+                            ? 'border-t-[#56e5a9] border-r-[#56e5a9]/40'
+                            : 'border-t-[#38bdf8] border-r-[#38bdf8]/40'
+                        )}
+                        style={{ animationDuration: '0.8s' }}
+                      />
+                      <div
+                        className={cn(
+                          'w-2 h-2 rounded-full animate-pulse',
+                          isWordPress
+                            ? 'bg-[#56e5a9] shadow-[0_0_8px_#56e5a9]'
+                            : 'bg-[#38bdf8] shadow-[0_0_8px_#38bdf8]'
+                        )}
+                      />
+                    </div>
+                    {/* Background Shimmer */}
+                    <div
+                      className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/[0.03] to-transparent animate-shimmer"
+                      style={{ backgroundSize: '200% 100%' }}
+                    />
+                  </div>
+                )}
+                <img
+                  src={previewImage}
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  width="640"
+                  height="400"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageError(true)}
+                  className={cn(
+                    'w-full h-full object-cover object-top transition-all duration-700 ease-out group-hover/img:scale-[1.03]',
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  )}
+                />
+              </>
             ) : (
               <ProjectPlaceholder
                 title={project.title}
